@@ -1,22 +1,33 @@
-import {Container,LogoContainer,ButtonContainer,ButtonIcon} from './styles';
-import Logo from '../../assets/construcao.png';
+import { 
+  CompanyName,
+  Container, 
+  HamburgerContainer, 
+  HamburgerImage, 
+  Logo, 
+  LogoContainer 
+} from './styles';
+import LogoImg from '../../assets/trabalhador-da-construcao-civil-trabalhando-com-uma-pa-ao-lado-da-pilha-de-material.png';
+import HamburgerImg from '../../assets/parquet.png';
 
-function Header(){
-   return(
+interface HeaderProps {
+  toggleMenu: () => void;
+}
+
+function Header({ toggleMenu }: HeaderProps) {
+  return (
     <Container>
+      {/* Hamburger + Logo lado a lado */}
+      <HamburgerContainer>
+        <HamburgerImage src={HamburgerImg} alt="Menu" onClick={toggleMenu} />
         <LogoContainer>
-            <ButtonContainer>
-                <ButtonIcon/>
-            </ButtonContainer>
-            <img 
-              style={{ cursor: 'pointer', width: '100px' }}
-              alt=""
-              src={Logo}
-            />
-            <h1>Casa Abreu</h1>
+          <Logo src={LogoImg} />
         </LogoContainer>
+        <CompanyName>
+         
+        </CompanyName>
+      </HamburgerContainer>
     </Container>
-   ) 
+  );
 }
 
 export default Header;
