@@ -14,7 +14,6 @@ export const Container = styled.div`
   }
 `;
 
-/* Área do texto de boas-vindas */
 export const WelcomeSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -40,7 +39,7 @@ export const Subtitle = styled.p`
   margin: 0;
 `;
 
-/* Área dos produtos */
+
 export const ProductsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;

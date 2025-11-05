@@ -23,13 +23,13 @@ export default function Home() {
 
   return (
     <Container>
-      {/* Seção de boas-vindas */}
+      
       <WelcomeSection>
         <Title>Bem-vindo à Casa Abreu</Title>
         <Subtitle>Encontre tudo para sua obra com qualidade e bom preço.</Subtitle>
       </WelcomeSection>
 
-      {/* Seção de produtos */}
+      
       <h2>Produtos em Destaque</h2>
       <ProductsGrid>
         {products.map((p, index) => (
