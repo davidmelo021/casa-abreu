@@ -9,6 +9,7 @@ import MarteloImg from '../../assets/OIP.webp';
 import PaImg from '../../assets/D_NQ_NP_682038-MLU73331788328_122023-O.webp';
 import MachadoImg from '../../assets/machado.webp';
 
+
 export default function Home() {
   const products = [
     { image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 25,00' },
