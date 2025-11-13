@@ -28,6 +28,6 @@ export const MenuItem = styled.div`
   transition: background 0.3s;
 
   &:hover {
-    background-color: #dcf500ff;
+    background-color: #ff6600;
   }
 `;
