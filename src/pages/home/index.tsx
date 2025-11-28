@@ -1,5 +1,5 @@
 import { Container, WelcomeSection, Title, Subtitle, ProductsGrid } from './styles';
-import { ProductCard } from '../../components/productCard';
+import { ProductCard } from '../../components/ProdutCard';
 import CimentoImg from '../../assets/cimento_cp_ii_e_32_50kg_csn_1079_1_20190801135404.webp';
 import TijoloImg  from '../../assets/Qual_o_melhor_tijolo_para_sua_obra__4.webp';
 import MadeiraImg from '../../assets/madesch-manutencao-da-madeira-tratada.jpg';
