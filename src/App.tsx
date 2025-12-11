@@ -5,7 +5,8 @@ import { AppRoutes } from './routes/routes';
 import { LoginButton } from './components/LoginButton'; 
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
-import { ProductCard } from './components/ProdutCard';
+import  CartSidebar  from './components/CartSidebar';
+
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -19,13 +20,10 @@ function App() {
     <BrowserRouter>
       <CartProvider>
         <Header toggleMenu={toggleMenu} toggleCart={toggleCart} />
+        <CartSidebar open={openCart} toggleCart={toggleCart} />
 
         <Sidebar open={openMenu} />
-        <ProductCard 
-          image="" 
-          title="" 
-          price=""
-        />
+       
 
         <div
           style={{

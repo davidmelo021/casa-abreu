@@ -1,5 +1,5 @@
 import { useCart } from "../../context/CartContext";
-import { IconContainer, Badge } from "./styles";
+import { Badge, IconContainer } from "./styles";
 import cartImg from '../../assets/png-transparent-shopping-cart-icon-shopping-cart-black-design-trade.png';
 
 interface Props {

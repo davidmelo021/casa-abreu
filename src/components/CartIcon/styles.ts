@@ -5,6 +5,7 @@ export const IconContainer = styled.div`
   right: 20px;
   top: 15px;
   cursor: pointer;
+  z-index: 10000;
 
   img {
     width: 32px;

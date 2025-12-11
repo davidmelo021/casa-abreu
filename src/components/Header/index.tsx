@@ -1,6 +1,7 @@
 import { 
   CompanyName,
-  Container, 
+  HeaderContainer,
+  LeftSide, 
   HamburgerContainer, 
   HamburgerImage, 
   Logo, 
@@ -8,7 +9,7 @@ import {
 } from './styles';
 import LogoImg from '../../assets/trabalhador-da-construcao-civil-trabalhando-com-uma-pa-ao-lado-da-pilha-de-material.png';
 import HamburgerImg from '../../assets/parquet.png';
-import CartIcon from "../../components/CartIcon";
+import CartIcon from '../CartIcon';
 
 interface HeaderProps {
   toggleMenu: () => void;
@@ -17,16 +18,19 @@ interface HeaderProps {
 
 function Header({ toggleMenu,toggleCart }: HeaderProps) {
   return (
-    <Container>
+    <HeaderContainer>
       <HamburgerContainer>
-        <HamburgerImage src={HamburgerImg} alt="Menu" onClick={toggleMenu} />
-        <LogoContainer>
-          <Logo src={LogoImg} />
-        </LogoContainer>
-        <CompanyName> </CompanyName>
+        <LeftSide>
+         <HamburgerImage src={HamburgerImg} alt="Menu" onClick={toggleMenu} />
+          <LogoContainer>
+            <Logo src={LogoImg} />
+          </LogoContainer>
+          <CompanyName/>
+        </LeftSide>
+        
         <CartIcon toggleCart={toggleCart} />
       </HamburgerContainer>
-    </Container>
+    </HeaderContainer>
   );
 }
 

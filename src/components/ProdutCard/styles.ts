@@ -4,16 +4,30 @@ export const Card = styled.div`
   width: 200px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-
+  transition: transform 0.2s ;
+  
   &:hover {
     transform: scale(1.05);
+  }
+
+  button {
+    margin-top: 8px;
+    padding: 8px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+
+    &:hover {
+      background: black;
+    }
   }
 `;
 
@@ -31,8 +45,9 @@ export const CardTitle = styled.h3`
   margin: 0;
 `;
 
-export const CardPrice = styled.span`
-  font-size: 0.9rem;
+export const CardPrice = styled.p`
+  font-size: 1rem;
   font-weight: 500;
   color: #1e3a8a;
+  margin: 0;
 `;

@@ -1,23 +1,31 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Container = styled.div`
+export const HeaderContainer = styled.header`
   width: 100%;
-  height: 70px; /* reduzimos a altura do header */
-  background-color: #fff;
+  height: 70px;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: #fff;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 export const HamburgerContainer = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px; /* diminui espaçamento */
+  gap: 10px;
+  position: relative; 
+`;
+export const LeftSide = styled.div`
+ display: flex;
+ align-items: center;
+ gap: 15px; 
 `;
 
 export const HamburgerImage = styled.img`
@@ -35,19 +43,30 @@ export const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center; /* centraliza verticalmente */
+  justify-content: center;
 `;
 
-export const Logo = styled.img.attrs({ alt: 'Logo da empresa' })`
-  width: 80px; /* diminui tamanho da logo */
+export const Logo = styled.img.attrs({ alt: "Logo da empresa" })`
+  width: 80px;
   height: auto;
   object-fit: contain;
   cursor: pointer;
 `;
 
 export const CompanyName = styled.h1`
-  font-size: 1rem; /* título menor */
+  font-size: 1rem;
   font-weight: 600;
   color: #222;
-  margin: 0; /* remove margens para não empurrar menu lateral */
+  margin: 0;
+`;
+
+export const Container = styled.header`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  background: #fff;
+  z-index: 999;
 `;
