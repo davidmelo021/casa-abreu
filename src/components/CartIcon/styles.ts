@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 export const IconContainer = styled.div`
-  position: absolute;
-  right: 20px;
-  top: 15px;
+  position: relative;
   cursor: pointer;
-  z-index: 10000;
+  display: flex;
+  align-items: center;
+  
+  
 
   img {
     width: 32px;
+    height: 32px;
   }
 
   &:hover {

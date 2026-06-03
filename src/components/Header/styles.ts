@@ -6,6 +6,7 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   padding: 0 20px;
+  box-sizing: border-box;
   background: #fff;
   position: fixed;
   top: 0;
@@ -18,9 +19,6 @@ export const HamburgerContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  position: relative; 
 `;
 export const LeftSide = styled.div`
  display: flex;

@@ -4,7 +4,7 @@ export const Container = styled.div`
   padding: 20px;
   text-align: center;
   width: 100%;
-  min-height: calc(100vh - 70px); /* ajusta altura da tela abaixo do header */
+  overflow-x: hidden;
 
   h2 {
     font-size: 1.5rem;
@@ -41,8 +41,16 @@ export const Subtitle = styled.p`
 
 
 export const ProductsGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  padding: 0 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 `;

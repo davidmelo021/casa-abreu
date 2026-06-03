@@ -30,6 +30,7 @@ function App() {
             marginTop: '70px',
             marginLeft: openMenu ? '220px' : '0',
             transition: 'margin-left 0.3s ease',
+            overflowX: 'hidden',
           }}
         >
           <AppRoutes />
