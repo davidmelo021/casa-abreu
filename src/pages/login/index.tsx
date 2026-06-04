@@ -13,7 +13,7 @@ function Login() {
     return (
         <Container>
             <Box>
-                <Title>Login</Title>
+                <Title>Entrar</Title>
                 <form onSubmit={handleSubmit}>
                     <Label>Email</Label>
                     <Input
