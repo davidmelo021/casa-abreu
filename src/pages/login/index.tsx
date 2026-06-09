@@ -1,13 +1,24 @@
-import {useState} from 'react';            
+import {useState} from 'react';
+import {useAuth} from '../../context/AuthContext';
+import {useNavigate} from 'react-router-dom';            
 import {Container,Box,Title, Input, Label, Button, GoogleButton,  } from './styles';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const { login } = useAuth();
+    const navigate = useNavigate();
     
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Email: ${email}\nPassword: ${password}`);
+        setError('');
+        try {
+            await login(email, password);
+            navigate('/');
+        } catch (error:any) {
+            setError(error.message );
+        }
     };
 
     return (
@@ -32,7 +43,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-
+                    {error && <p style={{ color: 'red', fontSize: '0.9rem' }}>{error}</p>}
                     <Button type="submit">Entrar</Button>
                 </form>
 

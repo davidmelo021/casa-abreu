@@ -6,6 +6,7 @@ import { LoginButton } from './components/LoginButton';
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import  CartSidebar  from './components/CartSidebar';
+import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 
   
   return (
+    <AuthProvider>
     <BrowserRouter>
       <CartProvider>
         <Header toggleMenu={toggleMenu} toggleCart={toggleCart} />
@@ -39,6 +41,8 @@ function App() {
         <LoginButton />
       </CartProvider>
     </BrowserRouter>
+
+    </AuthProvider>
   );
 }
 
