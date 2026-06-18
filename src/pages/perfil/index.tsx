@@ -41,4 +41,8 @@ export default function Perfil () {
   });
 
   const [favoritos, setFavoritos] = useState<Favorito[]>([]);
+  const [pedidos, setPedidos] = useState<Pedido[]>([]);
+  const [salvo, setSalvo] = useState(false);
+
+  useEffectS
 }
