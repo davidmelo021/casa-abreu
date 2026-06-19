@@ -44,5 +44,25 @@ export default function Perfil () {
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
   const [salvo, setSalvo] = useState(false);
 
-  useEffectS
+  useEffect (() => {
+    async function carregar (){
+      const headers = { Authorization: `Bearer ${token}` };
+      const [pRes, fRes, pedRes] = await Promise.all ([
+        fetch ('http://localhost:3000/clientes/perfil', { headers }),
+        fetch ('http://localhost:3000/clientes/favoritos', { headers }),
+        fetch ('http://localhost:3000/clientes/pedidos', { headers })
+      ]);
+      setPerfil(await pRes.json());
+      setFavoritos(await fRes.json());
+      setPedidos(await pedRes.json());
+      
+    }
+    carregar();
+  },[token]);
+
+  async function salvarPerfil (){
+    
+ }  
+
+
 }
