@@ -38,6 +38,7 @@ export default function Perfil () {
     nome: '',
     email: '',
     telefone: '', 
+    
   });
 
   const [favoritos, setFavoritos] = useState<Favorito[]>([]);
@@ -73,5 +74,30 @@ export default function Perfil () {
     setTimeout(() => setSalvo(false), 3000);
  }  
 
+ async function removerFavorito(id:number) {
+  await fetch(`http://localhost:3001/clientes/favoritos/${id}`,{
+    method:'DELETE',
+    headers:{Authorization:`Bearer ${token}`},
+  });
+  setFavoritos(prev =>prev.filter(f =>f.id !==id));
+ }
+
+ return (
+    <Container>
+      <Title>Perfil</Title>
+
+      <Section>
+        <SectionTitle>Dados Pessoais</SectionTitle>
+        <Label>Nome</Label>
+        <Input value={perfil.nome} onChange={e =>setPerfil({...perfil,nome:e.target.value})}></Input>
+
+        <Label>Email</Label>
+        <Input value={perfil.email} disabled></Input>
+
+        <Label>Telefone</Label>
+        <Input value={perfil.telefone} onChange={e =>setPerfil({...perfil,telefone:e.target.value})} placeholder="(00)00000-0000"></Input>
+      </Section>
+    </Container>
+ )
 
 }
