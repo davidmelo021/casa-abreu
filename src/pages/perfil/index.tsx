@@ -61,7 +61,16 @@ export default function Perfil () {
   },[token]);
 
   async function salvarPerfil (){
-    
+    await fetch('http://localhost:3001/clientes/perfil', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(perfil),
+    });
+    setSalvo(true);
+    setTimeout(() => setSalvo(false), 3000);
  }  
 
 
