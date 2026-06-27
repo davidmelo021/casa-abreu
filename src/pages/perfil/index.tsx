@@ -38,6 +38,13 @@ export default function Perfil () {
     nome: '',
     email: '',
     telefone: '', 
+    cep: '',
+    rua: '',
+    numero: '',
+    bairro: '',
+    cidade: '',
+    estado: '',
+    metodo_pagamento: '',
     
   });
 
