@@ -104,6 +104,12 @@ export default function Perfil () {
         <Label>Telefone</Label>
         <Input value={perfil.telefone} onChange={e =>setPerfil({...perfil,telefone:e.target.value})} placeholder="(00)00000-0000"></Input>
       </Section>
+
+      <Section>
+        <SectionTitle>Endereço de entrega</SectionTitle>
+        <Label>CEP</Label>
+        
+      </Section>
     </Container>
  )
 
