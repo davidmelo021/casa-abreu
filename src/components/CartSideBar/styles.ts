@@ -20,14 +20,8 @@ export const Container = styled.div<{open: boolean}>`
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+`;
 
-
-  button {
-    background: red;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
+export const Header = styled.div`
+  
 `;

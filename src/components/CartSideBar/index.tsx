@@ -1,7 +1,11 @@
 import { useCart } from "../../context/CartContext";
 import {useAuth} from '../../context/AuthContext';
 import {useNavigate} from 'react-router-dom';
-import { Container , Overlay} from "./styles";
+import { Container , Overlay,
+Header,CloseButton,EmptyState,ItemsList,
+ItemCard,ItemImage,ItemInfo,QtyRow,QtyButton,
+ItemPrice,RemoveButton,Footer,TotalRow,CheckoutButton    
+} from "./styles";
 
 interface Props {
     open: boolean;
@@ -9,7 +13,7 @@ interface Props {
 }
 
 export default function CartSidebar({ open, toggleCart }: Props) {
-    const { cart, removeFromCart, cartTotal, clearCart } = useCart();
+    const { cart, removeFromCart, cartTotal, clearCart,cartCount } = useCart();
     const { token, isLogado } = useAuth();
     const navigate = useNavigate();
 
@@ -48,26 +52,53 @@ export default function CartSidebar({ open, toggleCart }: Props) {
 
     return (
         <>
-            <Overlay open={open} onClick={toggleCart} />
-            <Container open={open}>
-                <h2>Carrinho</h2>
-                {cart.length === 0 && <p>Seu carrinho está vazio</p>}
-                {cart.map(item => (
-                    <div key={item.id}>
-                        <p>{item.name}</p>
-                        <p>Qtd: {item.quantity}</p>
-                        <p>R$ {(item.price * item.quantity).toFixed(2)}</p>
-                        <button onClick={() => removeFromCart(item.id)}>Remover</button>
-                    </div>
-                ))}
+             <Overlay open={open} onClick={toggleCart} />
+             <Container open={open}>
+                <Header>
+                    <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
+                    <CloseButton onClick={toggleCart}>✕</CloseButton>
+                </Header>
 
-                {cart.length > 0 && (
+                {cart.length === 0 ? (
+                    <EmptyState>
+                        <div style={{ fontSize: '3rem' }}>🛒</div>
+                        <p>Seu carrinho está vazio</p>
+                    </EmptyState>
+                ):(
                     <>
-                        <h3>Total: R$ {cartTotal.toFixed(2)}</h3>
-                        <button onClick={finalizarCompra}>Finalizar Compra</button>
+                        <ItemsList>
+                            {cart.map(item =>(
+                                <ItemCard key={item.id}>
+                                    <ItemImage>📦</ItemImage>
+                                    <ItemInfo>
+                                        <p>{item.name}</p>
+                                        <QtyRow>
+                                            <span style = {{fontSize: '0.85rem', color: '#777'}}>
+                                                Qtd: {item.quantity}
+                                            </span>
+                                        </QtyRow>
+                                    </ItemInfo>
+                                    <ItemPrice>
+                                         R$ {(item.price * item.quantity).toFixed(2)}
+                                    </ItemPrice>
+                                    <RemoveButton onClick={() => removeFromCart(item.id)}>
+                                         🗑
+                                    </RemoveButton>
+                                </ItemCard>
+                            ))}
+                        </ItemsList>
+                        <Footer>
+                            <TotalRow>
+                                <span>Total</span>
+                                <span>R$ {cartTotal.toFixed(2)}</span>
+                            </TotalRow>
+                            <CheckoutButton onClick={finalizarCompra}>
+                                Finalizar Compra
+                            </CheckoutButton>
+                        </Footer>
                     </>
                 )}
-            </Container>
+             </Container>
         </>
     );
 }
