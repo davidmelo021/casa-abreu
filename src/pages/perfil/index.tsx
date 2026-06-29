@@ -152,8 +152,39 @@ export default function Perfil () {
         </select>
       </Section>
 
-      
+      <Button onClick={salvarPerfil}>Salvar
+        {salvo ? 'Salvo com sucesso!' : 'Salvar Alterações'}
+      </Button>
+
+      <Section>
+        <SectionTitle>Produtos Favoritos</SectionTitle>
+        {favoritos.length === 0 && <p>Nenhum produto favorito adicionado.</p> }
+        <Grid>
+          {favoritos.map(f=>(
+            <FavoritoCard key={f.id}>
+              <img src={f.produto_imagem} alt={f.produto_nome} />
+              <p>{f.produto_nome}</p>
+              <p>R$ {f.produto_preco.toFixed(2)}</p>
+              <button onClick={() => removerFavorito(f.id)}>Remover</button>
+            </FavoritoCard>
+          ))}
+        </Grid>
+      </Section>
+
+      <Section>
+        <SectionTitle>Histórico de Pedidos</SectionTitle>
+        {pedidos.length === 0 && <p>Nenhum pedido realizado.</p>}
+        {pedidos.map(p=>(
+          <PedidoCard key={p.id}>
+            <PedidoItem>
+              <span>Pedido #{p.id}</span>
+              <span style={{ color: '#ff6600' }}>{p.status}</span>
+            </PedidoItem>
+          </PedidoCard>
+        ))}
+      </Section>
+
     </Container>
- )
+ );
 
 }
