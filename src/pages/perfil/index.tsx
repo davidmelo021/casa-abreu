@@ -102,14 +102,57 @@ export default function Perfil () {
         <Input value={perfil.email} disabled></Input>
 
         <Label>Telefone</Label>
-        <Input value={perfil.telefone} onChange={e =>setPerfil({...perfil,telefone:e.target.value})} placeholder="(00)00000-0000"></Input>
+        <Input value={perfil.telefone ||''} onChange={e =>setPerfil({...perfil,telefone:e.target.value})} placeholder="(00)00000-0000"></Input>
       </Section>
 
       <Section>
         <SectionTitle>Endereço de entrega</SectionTitle>
         <Label>CEP</Label>
-        
+        <Input value={perfil.cep ||''} onChange={e =>setPerfil({...perfil,cep:e.target.value})} placeholder="00000-000" ></Input>
+        <Grid>
+          <div>
+            <Label>Rua</Label>
+            <Input value={perfil.rua ||''} onChange={e =>setPerfil({...perfil,rua:e.target.value})} placeholder="Nome da rua"></Input>
+          </div>
+
+          <div>
+            <Label>Número</Label>
+            <Input value={perfil.numero ||''} onChange={e =>setPerfil({...perfil,numero:e.target.value})} placeholder="Nº"></Input>
+          </div>
+        </Grid>
+
+        <Label>Bairro</Label>
+        <Input value={perfil.bairro ||''} onChange={e =>setPerfil({...perfil,bairro:e.target.value})} placeholder="Bairro"></Input>
+        <Grid>
+          <div>
+            <Label>Cidade</Label>
+            <Input value={perfil.cidade ||''} onChange={e =>setPerfil({...perfil,cidade:e.target.value})} placeholder="Cidade"></Input>
+          </div>
+
+          <div>
+            <Label>Estado</Label>
+            <Input value={perfil.estado ||''} onChange={e =>setPerfil({...perfil,estado:e.target.value})} placeholder="UF" maxLength={2}></Input>
+          </div>
+        </Grid>
       </Section>
+
+      <Section>
+        <SectionTitle>Método de pagamento</SectionTitle>
+        <Label>Prefêrencia</Label>
+        <select
+          value={perfil.metodo_pagamento ||''}
+          onChange={e =>setPerfil({...perfil,metodo_pagamento:e.target.value})}
+          style={{ padding: '10px', borderRadius: '6px', border: '1px solid #ddd', width: '100%' }}
+        >
+          <option value="">Selecione...</option>
+            <option value="cartao_credito">Cartão de Crédito</option>
+          <option value="cartao_debito">Cartão de Débito</option>
+          <option value="pix">PIX</option>
+          <option value="boleto">Boleto</option>
+        </select>
+      </Section>
+
+      
     </Container>
  )
 
