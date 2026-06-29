@@ -15,9 +15,7 @@ export function Sidebar({ open }: SidebarProps) {
     <Container open={open}>
       <MenuItem onClick={() => navigate('/')}> Início</MenuItem>
       <MenuItem onClick={()=>navigate('/products')}> Produtos</MenuItem>
-      {isLogado && (
-        <MenuItem onClick={()=>navigate('/clientes')}>Clientes</MenuItem>
-      )}
+   
       {isLogado && (
          <MenuItem onClick={logout} style={{ color: '#ff6600' }}>Sair</MenuItem>
       )}
