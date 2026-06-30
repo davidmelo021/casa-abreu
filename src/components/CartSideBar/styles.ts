@@ -101,15 +101,21 @@ export const ItemCard = styled.div`
 `;
 
 export const ItemImage = styled.div`
-  width: 56px;
+   width: 56px;
   height: 56px;
   border-radius: 8px;
   background: #f3f3f3;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   flex-shrink: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 export const ItemInfo = styled.div`

@@ -18,7 +18,8 @@ export function ProductCard({ image, title, price }: ProductCardProps) {
       id: Date.now(),
       name: title,
       price: numericPrice,
-      quantity: 1
+      quantity: 1,
+      image: image,
     });
   }
 
