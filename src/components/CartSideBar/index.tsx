@@ -69,7 +69,9 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                         <ItemsList>
                             {cart.map(item =>(
                                 <ItemCard key={item.id}>
-                                    <ItemImage>📦</ItemImage>
+                                    <ItemImage>
+                                        <img src={item.image} alt={item.name} />
+                                    </ItemImage>
                                     <ItemInfo>
                                         <p>{item.name}</p>
                                         <QtyRow>

@@ -10,6 +10,7 @@ import MachadoImg from "../../assets/machado.webp";
 
 
 interface Product {
+  id: number;
   image: string;
   title: string;
   price: string;
@@ -24,19 +25,19 @@ const categories: Category[] = [
     {
         name:"Materias de construção",
         products: [
-           {image:CimentoImg, title: "Cimento", price: "R$30,00"},
-           {image:TijoloImg,title: "Tijolo", price: "R$1,50"},
-           {image:MadeiraImg,title: "Madeira", price: "R$50,00"},
-           {image:PregoImg,title: "Prego", price: "$R$0,10"},
+           {id: 1,image:CimentoImg, title: "Cimento", price: "R$30,00"},
+           {id: 2,image:TijoloImg,title: "Tijolo", price: "R$1,50"},
+           {id: 3,image:MadeiraImg,title: "Madeira", price: "R$50,00"},
+           {id: 4,image:PregoImg,title: "Prego", price: "$R$0,10"},
         ]
     },
 
     {
         name:"Ferramentas",
         products: [
-           {image:MarteloImg, title: "Martelo", price:"R$20,00" },
-           {image:PaImg,title: "Pá", price: "R$25,00"},
-           {image:MachadoImg,title: "Machado", price: "R$80,00"},
+           {id: 5,image:MarteloImg, title: "Martelo", price:"R$20,00" },
+           {id: 6,image:PaImg,title: "Pá", price: "R$25,00"},
+           {id: 7,image:MachadoImg,title: "Machado", price: "R$80,00"},
         ]
     },
 ]
@@ -50,7 +51,7 @@ export default function Products() {
                    <CategoryTitle>{cat.name}</CategoryTitle>
                    <Grid>
                       {cat.products.map((p, i) => (
-                        <ProductCard key={i} image={p.image} title={p.title} price={p.price} />
+                       <ProductCard key={p.id} id={p.id} image={p.image} title={p.title} price={p.price} />
                       ))}
                    </Grid>
                    <Divider />

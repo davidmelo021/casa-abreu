@@ -12,14 +12,14 @@ import MachadoImg from '../../assets/machado.webp';
 
 export default function Home() {
   const products = [
-    { image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 25,00' },
-    { image: TijoloImg, title: 'Tijolo 6 furos', price: 'R$ 1,50' },
-    { image: MadeiraImg, title: 'Madeira Tratada', price: 'R$ 12,00' },
-    { image: PregoImg,title:'Pregos',price:'R$0,60'},
-    { image: MangueiraImg,title:'Mangueira',price:'R$15,60'},
-    { image: MarteloImg,title:'Martelo',price:'R$59,90'},
-    { image: PaImg,title:'Pá',price:'R$115,90'},
-    { image: MachadoImg,title:'Machado',price:'R$300,90'}
+    { id:1,image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 25,00' },
+    { id:2,image: TijoloImg, title: 'Tijolo 6 furos', price: 'R$ 1,50' },
+    { id:3,image: MadeiraImg, title: 'Madeira Tratada', price: 'R$ 12,00' },
+    { id:4,image: PregoImg,title:'Pregos',price:'R$0,60'},
+    { id:5,image: MangueiraImg,title:'Mangueira',price:'R$15,60'},
+    { id:6,image: MarteloImg,title:'Martelo',price:'R$59,90'},
+    { id:7,image: PaImg,title:'Pá',price:'R$115,90'},
+    { id:8,image: MachadoImg,title:'Machado',price:'R$300,90'}
   ];
 
   return (
@@ -36,6 +36,7 @@ export default function Home() {
         {products.map((p, index) => (
           <ProductCard 
             key={index} 
+            id={p.id}
             image={p.image} 
             title={p.title} 
             price={p.price} 

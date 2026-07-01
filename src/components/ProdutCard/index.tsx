@@ -2,12 +2,13 @@ import { Card, CardImage, CardTitle, CardPrice } from './styles';
 import { useCart } from '../../context/CartContext';
 
 interface ProductCardProps {
+  id: number;
   image: string;
   title: string;
   price: string;
 }
 
-export function ProductCard({ image, title, price }: ProductCardProps) {
+export function ProductCard({ id, image, title, price }: ProductCardProps) {
   const {addToCart} = useCart();
   const numericPrice = Number (
     price.replace("R$","").replace(".","").replace(",",".").trim()
@@ -15,7 +16,7 @@ export function ProductCard({ image, title, price }: ProductCardProps) {
 
   function handleAdd(){
     addToCart({
-      id: Date.now(),
+      id,
       name: title,
       price: numericPrice,
       quantity: 1,
