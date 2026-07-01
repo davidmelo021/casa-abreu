@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useMemo,ReactNode } from "react";
 
 export interface CartItem {
     id: number;
@@ -42,12 +42,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCart([]);
     }
 
-    const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
-
-    const cartTotal = cart.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
+      const cartCount = useMemo(
+        () => cart.reduce((acc, item) => acc + item.quantity, 0),
+        [cart]
     );
+
+    const cartTotal = useMemo(
+        () => cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+        [cart]
+    );
+
 
     return (
         <CartContext.Provider

@@ -49,7 +49,8 @@ export default function CartSidebar({ open, toggleCart }: Props) {
             alert('Erro ao finalizar compra. Tente novamente.');
         }
     }
-
+console.log('cart:', cart);
+console.log('cartTotal:', cartTotal);
     return (
         <>
              <Overlay open={open} onClick={toggleCart} />
