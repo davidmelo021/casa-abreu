@@ -22,7 +22,7 @@ export const Container = styled.div<{ open: boolean }>`
   flex-direction: column;
 `;
 
-export const Header = styled.div`
+export const CartHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

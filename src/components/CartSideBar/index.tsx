@@ -2,7 +2,7 @@ import { useCart } from "../../context/CartContext";
 import {useAuth} from '../../context/AuthContext';
 import {useNavigate} from 'react-router-dom';
 import { Container , Overlay,
-Header,CloseButton,EmptyState,ItemsList,
+CartHeader,CloseButton,EmptyState,ItemsList,
 ItemCard,ItemImage,ItemInfo,QtyRow,QtyButton,
 ItemPrice,RemoveButton,Footer,TotalRow,CheckoutButton    
 } from "./styles";
@@ -49,16 +49,16 @@ export default function CartSidebar({ open, toggleCart }: Props) {
             alert('Erro ao finalizar compra. Tente novamente.');
         }
     }
-console.log('cart:', cart);
-console.log('cartTotal:', cartTotal);
+
+
     return (
         <>
              <Overlay open={open} onClick={toggleCart} />
              <Container open={open}>
-                <Header>
+                <CartHeader>
                     <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
                     <CloseButton onClick={toggleCart}>✕</CloseButton>
-                </Header>
+                </CartHeader>
 
                 {cart.length === 0 ? (
                     <EmptyState>
