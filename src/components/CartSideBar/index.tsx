@@ -90,6 +90,7 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                                 </ItemCard>
                             ))}
                         </ItemsList>
+                        
                         <Footer>
                             <TotalRow>
                                 <span>Total</span>

@@ -188,8 +188,9 @@ export const Footer = styled.div`
   padding: 20px 24px;
   background: #fff;
   border-top: 1px solid #eee;
+  position: sticky;
+  bottom: 0;
 `;
-
 export const TotalRow = styled.div`
   display: flex;
   justify-content: space-between;
