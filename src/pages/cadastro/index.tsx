@@ -16,6 +16,81 @@ export default function Cadastro() {
         setError('');
 
         if(password !== confirmaPassword) {
-            
+            setError('As senhas não coincidem');
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/api/cadastro',{
+                method:'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name, email, password}),
+            });
+
+            if(!response.ok) {
+                const err = await response.json();
+                throw new Error(err.message );
+            }
+            setSuccess(true);
+            setTimeout(() => navigate('/login') ,2000);
+        } catch (err:any) {
+            setError(err.message);
         }
     }
+
+    return (
+        <Container>
+            <Box>
+                <Title>Cadastrar</Title>
+                {   sucess ? (
+                    <p style={{color:'green',fontSize:'1rem'}}>
+                        Cadastro realizado! Redirecionando para o login...
+                    </p>
+                ) : (
+                    <form onSubmit={handleSubmit}>
+                        <Label>Nome</Label>
+                        <Input
+                            type="text"
+                            placeholder="Digite seu nome"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+
+                        <Label>Email</Label>
+                        <Input
+                            type="email"
+                            placeholder="Digite seu email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+
+                        <Label>Senha</Label>
+                        <Input
+                            type="password"
+                            placeholder="Digite sua senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+
+                        <Label>Confirme a Senha</Label>
+                        <Input
+                            type="password" 
+                            placeholder="Confirme sua senha"
+                            value={confirmaPassword}
+                            onChange={(e) => setConfirmaPassword(e.target.value)}
+                            required
+                        />
+
+                        {error && <p style={{color:'red',fontSize: '0.9rem', marginTop: '8px'}}>{error}</p>}
+                        <Button type="submit">Criar sua conta</Button>
+                    </form>
+                )}
+
+                <p></p>
+            </Box>
+        </Container>
+    );
+}
