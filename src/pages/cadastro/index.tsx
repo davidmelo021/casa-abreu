@@ -9,7 +9,7 @@ export default function Cadastro() {
     const [confirmaPassword, setConfirmaPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const navigation = useNavigation();
+    const navigate = useNavigation();
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -89,7 +89,15 @@ export default function Cadastro() {
                     </form>
                 )}
 
-                <p></p>
+                <p style={{ marginTop: '16px', fontSize: '0.9rem', color: '#555' }}>
+                     Já tem conta?{' '}
+                     <span
+                        onClick={() => navigation.navigate('/login')}
+                        style={{color: '#ff6600', cursor: 'pointer', fontWeight: 600}}
+                     >
+                        Entrar
+                     </span>
+                </p>
             </Box>
         </Container>
     );
