@@ -55,7 +55,7 @@ function Login() {
                         onClick={() => navigate('/cadastro')}
                         style={{color: '#ff6600', cursor: 'pointer', fontWeight: 600}}
                     >
-
+                        Cadastre-se
                     </span>
                 </p>
             </Box>

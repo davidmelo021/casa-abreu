@@ -51,58 +51,58 @@ export default function CartSidebar({ open, toggleCart }: Props) {
     }
 
 
-    return (
-        <>
-             <Overlay open={open} onClick={toggleCart} />
-             <Container open={open}>
-                <CartHeader>
-                    <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
-                    <CloseButton onClick={toggleCart}>✕</CloseButton>
-                </CartHeader>
+   return (
+    <>
+        <Overlay open={open} onClick={toggleCart} />
+        <Container open={open}>
+            <CartHeader>
+                <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
+                <CloseButton onClick={toggleCart}>✕</CloseButton>
+            </CartHeader>
 
-                {cart.length === 0 ? (
-                    <EmptyState>
-                        <div style={{ fontSize: '3rem' }}>🛒</div>
-                        <p>Seu carrinho está vazio</p>
-                    </EmptyState>
-                ):(
-                    <>
-                        <ItemsList>
-                            {cart.map(item =>(
-                                <ItemCard key={item.id}>
-                                    <ItemImage>
-                                        <img src={item.image} alt={item.name} />
-                                    </ItemImage>
-                                    <ItemInfo>
-                                        <p>{item.name}</p>
-                                        <QtyRow>
-                                            <span style = {{fontSize: '0.85rem', color: '#777'}}>
-                                                Qtd: {item.quantity}
-                                            </span>
-                                        </QtyRow>
-                                    </ItemInfo>
-                                    <ItemPrice>
-                                         R$ {(item.price * item.quantity).toFixed(2)}
-                                    </ItemPrice>
-                                    <RemoveButton onClick={() => removeFromCart(item.id)}>
-                                         🗑
-                                    </RemoveButton>
-                                </ItemCard>
-                            ))}
-                        </ItemsList>
-                        
-                        <Footer>
-                            <TotalRow>
-                                <span>Total</span>
-                                <span>R$ {cartTotal.toFixed(2)}</span>
-                            </TotalRow>
-                            <CheckoutButton onClick={finalizarCompra}>
-                                Finalizar Compra
-                            </CheckoutButton>
-                        </Footer>
-                    </>
-                )}
-             </Container>
-        </>
-    );
-}
+            {cart.length === 0 ? (
+                <EmptyState>
+                    <div style={{ fontSize: '3rem' }}>🛒</div>
+                    <p>Seu carrinho está vazio</p>
+                </EmptyState>
+            ) : (
+                <>
+                    <ItemsList>
+                        {cart.map(item => (
+                            <ItemCard key={item.id}>
+                                <ItemImage>
+                                    <img src={item.image} alt={item.name} />
+                                </ItemImage>
+                                <ItemInfo>
+                                    <p>{item.name}</p>
+                                    <QtyRow>
+                                        <span style={{ fontSize: '0.85rem', color: '#777' }}>
+                                            Qtd: {item.quantity}
+                                        </span>
+                                    </QtyRow>
+                                </ItemInfo>
+                                <ItemPrice>
+                                    R$ {(item.price * item.quantity).toFixed(2)}
+                                </ItemPrice>
+                                <RemoveButton onClick={() => removeFromCart(item.id)}>
+                                    🗑
+                                </RemoveButton>
+                            </ItemCard>
+                        ))}
+                    </ItemsList>
+
+                    <Footer>
+                        <TotalRow>
+                            <span>Total</span>
+                            <span>R$ {cartTotal.toFixed(2)}</span>
+                        </TotalRow>
+                        <CheckoutButton onClick={finalizarCompra}>
+                            Finalizar Compra
+                        </CheckoutButton>
+                    </Footer>
+                </>
+            )}
+        </Container>
+    </>
+
+)};

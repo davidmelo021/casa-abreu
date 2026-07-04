@@ -11,7 +11,7 @@ interface ProductCardProps {
 export function ProductCard({ id, image, title, price }: ProductCardProps) {
   const {addToCart} = useCart();
   const numericPrice = Number (
-    price.replace("R$","").replace(".","").replace(",",".").trim()
+    price.replace("R$","").replace(/\./g, "").replace(",",".").trim()
   );
 
   function handleAdd(){
