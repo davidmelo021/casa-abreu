@@ -48,6 +48,16 @@ function Login() {
                 </form>
 
                 <GoogleButton>Entrar com Google</GoogleButton>
+
+                <p style={{ marginTop: '16px', fontSize: '0.9rem', color: '#555'}}>
+                    Não tem conta ?{' '}
+                    <span
+                        onClick={() => navigate('/cadastro')}
+                        style={{color: '#ff6600', cursor: 'pointer', fontWeight: 600}}
+                    >
+
+                    </span>
+                </p>
             </Box>
         </Container>
     );

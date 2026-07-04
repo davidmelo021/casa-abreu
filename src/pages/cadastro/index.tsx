@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useNavigation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Container, Box, Title, Input, Label, Button} from '../../pages/login/styles';
 
 export default function Cadastro() {
@@ -9,7 +9,7 @@ export default function Cadastro() {
     const [confirmaPassword, setConfirmaPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const navigate = useNavigation();
+    const navigate = useNavigate();
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -42,7 +42,7 @@ export default function Cadastro() {
         <Container>
             <Box>
                 <Title>Cadastrar</Title>
-                {   sucess ? (
+                {   success ? (
                     <p style={{color:'green',fontSize:'1rem'}}>
                         Cadastro realizado! Redirecionando para o login...
                     </p>
@@ -92,7 +92,7 @@ export default function Cadastro() {
                 <p style={{ marginTop: '16px', fontSize: '0.9rem', color: '#555' }}>
                      Já tem conta?{' '}
                      <span
-                        onClick={() => navigation.navigate('/login')}
+                        onClick={() => navigate('/login')}
                         style={{color: '#ff6600', cursor: 'pointer', fontWeight: 600}}
                      >
                         Entrar
