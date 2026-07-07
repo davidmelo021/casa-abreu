@@ -1,10 +1,11 @@
+import { useRef } from 'react';
 import { useCart } from "../../context/CartContext";
-import {useAuth} from '../../context/AuthContext';
-import {useNavigate} from 'react-router-dom';
-import { Container , Overlay,
-CartHeader,CloseButton,EmptyState,ItemsList,
-ItemCard,ItemImage,ItemInfo,QtyRow,QtyButton,
-ItemPrice,RemoveButton,Footer,TotalRow,CheckoutButton    
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import {
+    Container, Overlay, CartHeader, CloseButton, EmptyState,
+    ItemsList, ItemCard, ItemImage, ItemInfo, QtyRow,
+    ItemPrice, RemoveButton, Footer, TotalRow, CheckoutButton
 } from "./styles";
 
 interface Props {
@@ -13,9 +14,16 @@ interface Props {
 }
 
 export default function CartSidebar({ open, toggleCart }: Props) {
-    const { cart, removeFromCart, cartTotal, clearCart,cartCount } = useCart();
+    const cartRef = useRef<any[]>([]);
+    const { cart, removeFromCart, clearCart, cartCount } = useCart();
     const { token, isLogado } = useAuth();
     const navigate = useNavigate();
+
+    cartRef.current = cart;
+
+    const totalCalculado = cartRef.current.reduce(
+        (acc, item) => acc + item.price * item.quantity, 0
+    );
 
     async function finalizarCompra() {
         if (!isLogado) {
@@ -25,7 +33,7 @@ export default function CartSidebar({ open, toggleCart }: Props) {
         }
 
         try {
-            const itens = cart.map(item => ({
+            const itens = cartRef.current.map(item => ({
                 nome: item.name,
                 preco: item.price,
                 quantidade: item.quantity,
@@ -50,59 +58,58 @@ export default function CartSidebar({ open, toggleCart }: Props) {
         }
     }
 
+    return (
+        <>
+            <Overlay open={open} onClick={toggleCart} />
+            <Container open={open}>
+                <CartHeader>
+                    <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
+                    <CloseButton onClick={toggleCart}>✕</CloseButton>
+                </CartHeader>
 
-   return (
-    <>
-        <Overlay open={open} onClick={toggleCart} />
-        <Container open={open}>
-            <CartHeader>
-                <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
-                <CloseButton onClick={toggleCart}>✕</CloseButton>
-            </CartHeader>
+                {cart.length === 0 ? (
+                    <EmptyState>
+                        <div style={{ fontSize: '3rem' }}>🛒</div>
+                        <p>Seu carrinho está vazio</p>
+                    </EmptyState>
+                ) : (
+                    <>
+                        <ItemsList>
+                            {cartRef.current.map(item => (
+                                <ItemCard key={item.id}>
+                                    <ItemImage>
+                                        <img src={item.image} alt={item.name} />
+                                    </ItemImage>
+                                    <ItemInfo>
+                                        <p>{item.name}</p>
+                                        <QtyRow>
+                                            <span style={{ fontSize: '0.85rem', color: '#777' }}>
+                                                Qtd: {item.quantity}
+                                            </span>
+                                        </QtyRow>
+                                    </ItemInfo>
+                                    <ItemPrice>
+                                        R$ {(item.price * item.quantity).toFixed(2)}
+                                    </ItemPrice>
+                                    <RemoveButton onClick={() => removeFromCart(item.id)}>
+                                        🗑
+                                    </RemoveButton>
+                                </ItemCard>
+                            ))}
+                        </ItemsList>
 
-            {cart.length === 0 ? (
-                <EmptyState>
-                    <div style={{ fontSize: '3rem' }}>🛒</div>
-                    <p>Seu carrinho está vazio</p>
-                </EmptyState>
-            ) : (
-                <>
-                    <ItemsList>
-                        {cart.map(item => (
-                            <ItemCard key={item.id}>
-                                <ItemImage>
-                                    <img src={item.image} alt={item.name} />
-                                </ItemImage>
-                                <ItemInfo>
-                                    <p>{item.name}</p>
-                                    <QtyRow>
-                                        <span style={{ fontSize: '0.85rem', color: '#777' }}>
-                                            Qtd: {item.quantity}
-                                        </span>
-                                    </QtyRow>
-                                </ItemInfo>
-                                <ItemPrice>
-                                    R$ {(item.price * item.quantity).toFixed(2)}
-                                </ItemPrice>
-                                <RemoveButton onClick={() => removeFromCart(item.id)}>
-                                    🗑
-                                </RemoveButton>
-                            </ItemCard>
-                        ))}
-                    </ItemsList>
-
-                    <Footer>
-                        <TotalRow>
-                            <span>Total</span>
-                            <span>R$ {cartTotal.toFixed(2)}</span>
-                        </TotalRow>
-                        <CheckoutButton onClick={finalizarCompra}>
-                            Finalizar Compra
-                        </CheckoutButton>
-                    </Footer>
-                </>
-            )}
-        </Container>
-    </>
-
-)};
+                        <Footer>
+                            <TotalRow>
+                                <span>Total</span>
+                                <span>R$ {totalCalculado.toFixed(2)}</span>
+                            </TotalRow>
+                            <CheckoutButton onClick={finalizarCompra}>
+                                Finalizar Compra
+                            </CheckoutButton>
+                        </Footer>
+                    </>
+                )}
+            </Container>
+        </>
+    );
+}
