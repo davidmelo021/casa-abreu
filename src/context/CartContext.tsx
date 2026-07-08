@@ -12,6 +12,7 @@ interface CartContextType {
     cart: CartItem[];
     addToCart: (item: CartItem) => void;
     removeFromCart: (id: number) => void;
+    updateQuantity: (id: number, quantity: number) => void;
     clearCart: () => void;
     cartCount: number;
     cartTotal: number;
@@ -38,6 +39,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCart(prev => prev.filter(item => item.id !== id));
     }
 
+    function updateQuantity(id: number, quantity: number) {
+        if (quantity <= 0) {
+            removeFromCart(id);
+            return;
+        }
+        setCart(prev =>
+            prev.map(item =>
+                item.id === id ? { ...item, quantity } : item
+            )
+        );
+    }
+
     function clearCart() {
         setCart([]);
     }
@@ -47,18 +60,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
         [cart]
     );
 
-    const cartTotal = useMemo(() => {
-        const total = cart.reduce((acc, item) => {
-            console.log(`${item.name}: price=${item.price}, qty=${item.quantity}`);
-            return acc + item.price * item.quantity;
-        }, 0);
-        console.log('TOTAL:', total);
-        return total;
-    }, [cart]);
+    const cartTotal = useMemo(
+        () => cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+        [cart]
+    );
 
     return (
         <CartContext.Provider
-            value={{ cart, addToCart, removeFromCart, clearCart, cartCount, cartTotal }}
+            value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, cartCount, cartTotal }}
         >
             {children}
         </CartContext.Provider>

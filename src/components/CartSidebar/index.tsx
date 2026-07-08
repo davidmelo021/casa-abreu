@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import {
     Container, Overlay, CartHeader, CloseButton, EmptyState,
     ItemsList, ItemCard, ItemImage, ItemInfo, QtyRow,
-    ItemPrice, RemoveButton, Footer, TotalRow, CheckoutButton
+    ItemPrice, RemoveButton, Footer, TotalRow, CheckoutButton,
+    QtyButton
 } from "./styles";
 
 interface Props {
@@ -83,9 +84,11 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                                     <ItemInfo>
                                         <p>{item.name}</p>
                                         <QtyRow>
+                                             <QtyButton onClick={() => updateQuantity(item.id, item.quantity - 1)}>−</QtyButton>
                                             <span style={{ fontSize: '0.85rem', color: '#777' }}>
                                                 Qtd: {item.quantity}
                                             </span>
+                                            <QtyButton onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</QtyButton>
                                         </QtyRow>
                                     </ItemInfo>
                                     <ItemPrice>
