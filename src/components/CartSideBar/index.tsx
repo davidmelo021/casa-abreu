@@ -61,7 +61,7 @@ export default function CartSidebar({ open, toggleCart }: Props) {
     return (
         <>
             <Overlay open={open} onClick={toggleCart} />
-            <Container open={open}>
+            <Container open={open} key={cartCount}>
                 <CartHeader>
                     <h2>Carrinho {cartCount > 0 && <span>{cartCount}</span>}</h2>
                     <CloseButton onClick={toggleCart}>✕</CloseButton>
