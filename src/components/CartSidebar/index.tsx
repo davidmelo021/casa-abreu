@@ -26,38 +26,48 @@ export default function CartSidebar({ open, toggleCart }: Props) {
         (acc, item) => acc + item.price * item.quantity, 0
     );
 
-    async function finalizarCompra() {
-        if (!isLogado) {
-            alert('Você precisa estar logado para finalizar a compra!');
-            navigate('/login');
-            return;
-        }
-
-        try {
-            const itens = cartRef.current.map(item => ({
-                nome: item.name,
-                preco: item.price,
-                quantidade: item.quantity,
-            }));
-
-            const response = await fetch('http://localhost:3001/pedidos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ itens }),
-            });
-
-            if (!response.ok) throw new Error('Erro ao finalizar compra');
-
-            alert('Compra finalizada com sucesso! 🎉');
-            clearCart();
-            toggleCart();
-        } catch (err) {
-            alert('Erro ao finalizar compra. Tente novamente.');
-        }
+  async function finalizarCompra() {
+    if (!isLogado) {
+        alert('Você precisa estar logado para finalizar a compra!');
+        navigate('/login');
+        return;
     }
+
+    try {
+        const itens = cartRef.current.map(item => ({
+            nome: item.name,
+            preco: item.price,
+            quantidade: item.quantity,
+        }));
+
+        const response = await fetch('http://localhost:3001/pedidos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ itens }),
+        });
+
+        if (!response.ok) throw new Error('Erro ao finalizar compra');
+
+        const data = await response.json();
+        const total = totalCalculado;
+        const itensSalvos = [...cartRef.current];
+
+        clearCart();
+        toggleCart();
+        navigate('/confirmacao', {
+            state: {
+                pedidoId: data.pedidoId,
+                itens: itensSalvos,
+                total,
+            }
+        });
+    } catch (err) {
+        alert('Erro ao finalizar compra. Tente novamente.');
+    }
+}
 
     return (
         <>
