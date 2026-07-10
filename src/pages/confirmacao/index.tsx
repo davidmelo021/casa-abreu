@@ -1,113 +1,48 @@
 import {useLocation,useNavigate} from 'react-router-dom';
-import styled from 'styled-components';
+import { Container, Card, Icone, Title, Subtitle, PedidoInfo, PedidoNumero, ItemRow, ItemNome, ItemQty, ItemPreco, TotalRow, BotoesRow } from './styles';
 
-const Container = styled.div`
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-`;
 
-const Card = styled.div`
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  padding: 32px;
-  text-align: center;
-`;
 
-const Icone = styled.div`
-  font-size: 4rem;
-  margin-bottom: 16px;
-`;
+export default function Confirmacao() {
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
-const Title = styled.h1`
-  color: #222;
-  font-size: 1.8rem;
-  margin-bottom: 8px;
-`;
-
-const Subtitle = styled.p`
-  color: #666;
-  margin-bottom: 32px;
-`;
-
-const PedidoInfo = styled.div`
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 24px;
-  text-align: left;
-`;
-
-const PedidoNumero = styled.p`
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 16px;
-
-  span {
-    font-weight: 700;
-    color: #ff6600;
+  if (!state || !state.pedido) {
+    navigate('/');
+    return null;
   }
-`;
+  const {pedido.Id, itens, total} = state;
 
-const ItemRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 0.95rem;
+  return (
+    <Container>
+      <Card>
+        <Icone>✅</Icone>
+        <Title>Pedido Confirmado!</Title>
+        <Subtitle>Obrigado por sua compra. Seu pedido foi processado com sucesso.</Subtitle>
 
-  &:last-child {
-    border-bottom: none;
-  }
-`;
+        <PedidoInfo>
+          <PedidoNumero>
+            Pedido: <span>#{pedido.Id}</span>
+          </PedidoNumero>
 
-const ItemNome = styled.span`
-  color: #333;
-  flex: 1;
-`;
+          {itens.map ((item:any) =>(
+            <ItemRow key={item.id}>
+              <ItemNome>{item.nome}</ItemNome>
+              <ItemQty>{item.quantidade}</ItemQty>
+              <ItemPreco>R$ {item.preco.toFixed(2)}</ItemPreco>
+            </ItemRow>
+          ))}
 
-const ItemQty = styled.span`
-  color: #888;
-  margin: 0 16px;
-  font-size: 0.85rem;
-`;
+          <TotalRow>
+            <span>Total</span>
+            <span style = {{color: '#ff6600' }}>R$ {total.toFixed(2)}</span>
+          </TotalRow>
+        </PedidoInfo>
 
-const ItemPreco = styled.span`
-  color: #ff6600;
-  font-weight: 600;
-`;
-
-const TotalRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 2px solid #eee;
-  font-size: 1.1rem;
-  font-weight: 700;
-`;
-
-const BotoesRow = styled.div`
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-`;
-
-const Button = styled.button<{ secondary?: boolean }>`
-  flex: 1;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  background: ${({ secondary }) => secondary ? '#f0f0f0' : '#ff6600'};
-  color: ${({ secondary }) => secondary ? '#333' : '#fff'};
-
-  &:hover {
-    background: ${({ secondary }) => secondary ? '#e0e0e0' : '#e05500'};
-  }
-`;
+          <BotoesRow>
+            
+          </BotoesRow>
+      </Card>
+    </Container>
+  )
+}
