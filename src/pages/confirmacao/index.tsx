@@ -1,17 +1,16 @@
-import {useLocation,useNavigate} from 'react-router-dom';
-import { Container, Card, Icone, Title, Subtitle, PedidoInfo, PedidoNumero, ItemRow, ItemNome, ItemQty, ItemPreco, TotalRow, BotoesRow } from './styles';
-
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Container, Card, Icone, Title, Subtitle, PedidoInfo, PedidoNumero, ItemRow, ItemNome, ItemQty, ItemPreco, TotalRow, BotoesRow, Button } from './styles';
 
 export default function Confirmacao() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  if (!state || !state.pedido) {
+  if (!state) {
     navigate('/');
     return null;
   }
-  const {pedido.Id, itens, total} = state;
+
+  const { pedidoId, itens, total } = state;
 
   return (
     <Container>
@@ -22,27 +21,32 @@ export default function Confirmacao() {
 
         <PedidoInfo>
           <PedidoNumero>
-            Pedido: <span>#{pedido.Id}</span>
+            Pedido: <span>#{pedidoId}</span>
           </PedidoNumero>
 
-          {itens.map ((item:any) =>(
+          {itens.map((item: any) => (
             <ItemRow key={item.id}>
-              <ItemNome>{item.nome}</ItemNome>
-              <ItemQty>{item.quantidade}</ItemQty>
-              <ItemPreco>R$ {item.preco.toFixed(2)}</ItemPreco>
+              <ItemNome>{item.name}</ItemNome>
+              <ItemQty>x{item.quantity}</ItemQty>
+              <ItemPreco>R$ {(item.price * item.quantity).toFixed(2)}</ItemPreco>
             </ItemRow>
           ))}
 
           <TotalRow>
             <span>Total</span>
-            <span style = {{color: '#ff6600' }}>R$ {total.toFixed(2)}</span>
+            <span style={{ color: '#ff6600' }}>R$ {total.toFixed(2)}</span>
           </TotalRow>
         </PedidoInfo>
 
-          <BotoesRow>
-            
-          </BotoesRow>
+        <BotoesRow>
+          <Button secondary onClick={() => navigate('/perfil')}>
+            Ver Pedidos
+          </Button>
+          <Button onClick={() => navigate('/')}>
+            Continuar Comprando
+          </Button>
+        </BotoesRow>
       </Card>
     </Container>
-  )
+  );
 }
