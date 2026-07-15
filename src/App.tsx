@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import CartSidebar from './components/CartSidebar';
 import { AuthProvider } from './context/AuthContext';
+import { SearchProvider } from './context/SearchContext';
 
 function AppContent() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -39,9 +40,11 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+      <SearchProvider>
         <CartProvider>
           <AppContent />
         </CartProvider>
+        </SearchProvider>
       </BrowserRouter>
     </AuthProvider>
   );

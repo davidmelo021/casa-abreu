@@ -68,3 +68,33 @@ export const Container = styled.header`
   background: #fff;
   z-index: 999;
 `;
+
+export const SearchBar = styled.div`
+  display: flex;
+  align-items: center;
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 6px 14px;
+  gap: 8px;
+  flex: 1;
+  max-width: 400px;
+  margin: 0 20px;
+
+  input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    width: 100%;
+    color: #333;
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  span {
+    color: #aaa;
+    font-size: 1rem;
+  }
+`;
