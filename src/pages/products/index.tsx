@@ -1,5 +1,6 @@
 import {ProductCard} from "../../components/ProdutCard";
 import { Container, Title, Grid, CategoryTitle, Divider } from "./styles";
+import {useSearch} from "../../context/SearchContext";
 import CimentoImg from "../../assets/cimento_cp_ii_e_32_50kg_csn_1079_1_20190801135404.webp";
 import TijoloImg from "../../assets/Qual_o_melhor_tijolo_para_sua_obra__4.webp";
 import MadeiraImg from "../../assets/madesch-manutencao-da-madeira-tratada.jpg";
@@ -43,10 +44,18 @@ const categories: Category[] = [
 ]
 
 export default function Products() {
+
+    const {query} = useSearch();
+    const filteredCategories = categories.map (cat =>({
+        ...cat,
+        products : cat.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
+    }))
+        .filter(cat => cat.products.length > 0);
+
     return (
         <Container>
             <Title>Todos os produtos</Title>
-            {categories.map((cat) => (
+            {filteredCategories.map((cat) => (
                 <div key={cat.name}>
                    <CategoryTitle>{cat.name}</CategoryTitle>
                    <Grid>
