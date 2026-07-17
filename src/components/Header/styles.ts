@@ -79,6 +79,7 @@ export const SearchBar = styled.div`
   flex: 1;
   max-width: 400px;
   margin: 0 20px;
+  margin-top: 12px;
 
   input {
     border: none;
@@ -96,5 +97,36 @@ export const SearchBar = styled.div`
   span {
     color: #aaa;
     font-size: 1rem;
+  }
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const Avatar = styled.div`
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ff6600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+`;
+
+export const UserName = styled.span`
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+
+  @media (max-width: 600px) {
+    display: none;
   }
 `;

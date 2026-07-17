@@ -47,7 +47,7 @@ export const CardTitle = styled.h3`
 
 export const CardPrice = styled.p`
   font-size: 1rem;
-  font-weight: 500;
-  color: #1e3a8a;
+  font-weight: 700;
+  color: #070a11;
   margin: 0;
 `;

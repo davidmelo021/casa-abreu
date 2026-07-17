@@ -52,20 +52,41 @@ export default function Products() {
     }))
         .filter(cat => cat.products.length > 0);
 
-    return (
-        <Container>
-            <Title>Todos os produtos</Title>
-            {filteredCategories.map((cat) => (
-                <div key={cat.name}>
-                   <CategoryTitle>{cat.name}</CategoryTitle>
-                   <Grid>
-                      {cat.products.map((p, i) => (
-                       <ProductCard key={p.id} id={p.id} image={p.image} title={p.title} price={p.price} />
-                      ))}
-                   </Grid>
-                   <Divider />
-                </div>
-            ))}
-        </Container>
-    );
+    const  totalResults = filteredCategories.reduce((acc, cat) => acc + cat.products.length, 0);
+
+ return (
+    <Container>
+      <Title>Todos os produtos</Title>
+
+      {query && (
+        <p style={{ color: '#888', marginBottom: '16px' }}>
+          {totalResults} resultado(s) para "<strong>{query}</strong>"
+        </p>
+      )}
+
+      {filteredCategories.length === 0 ? (
+        <p style={{ textAlign: 'center', color: '#888', marginTop: '40px', fontSize: '1.1rem' }}>
+          😕 Nenhum produto encontrado para "<strong>{query}</strong>"
+        </p>
+      ) : (
+        filteredCategories.map((cat) => (
+          <div key={cat.name}>
+            <CategoryTitle>{cat.name}</CategoryTitle>
+            <Grid>
+              {cat.products.map((p) => (
+                <ProductCard
+                  key={p.id}
+                  id={p.id}
+                  image={p.image}
+                  title={p.title}
+                  price={p.price}
+                />
+              ))}
+            </Grid>
+            <Divider />
+          </div>
+        ))
+      )}
+    </Container>
+  );
 }
