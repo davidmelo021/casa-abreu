@@ -1,5 +1,6 @@
 import {useSearch} from '../../context/SearchContext';
 import {useNavigate} from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { 
   CompanyName,
   HeaderContainer,
@@ -8,7 +9,8 @@ import {
   HamburgerImage, 
   Logo, 
   LogoContainer, 
-  SearchBar
+  SearchBar,
+  UserInfo,Avatar,UserName
 } from './styles';
 import LogoImg from '../../assets/trabalhador-da-construcao-civil-trabalhando-com-uma-pa-ao-lado-da-pilha-de-material.png';
 import HamburgerImg from '../../assets/parquet.png';
@@ -30,8 +32,14 @@ function Header({ toggleMenu,toggleCart }: HeaderProps) {
     }
   }
 
+  const { isLogado, nome } = useAuth();
+
+const iniciais = nome
+  ? nome.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase()
+  : '';
+
   return (
-    <HeaderContainer>
+ <HeaderContainer>
       <HamburgerContainer>
         <LeftSide>
           <HamburgerImage src={HamburgerImg} alt="Menu" onClick={toggleMenu} />
@@ -50,14 +58,19 @@ function Header({ toggleMenu,toggleCart }: HeaderProps) {
             onChange={handleSearch}
           />
           {query && (
-            <span
-              style={{ cursor: 'pointer' }}
-              onClick={() => setQuery('')}
-            >✕</span>
+            <span style={{ cursor: 'pointer' }} onClick={() => setQuery('')}>✕</span>
           )}
         </SearchBar>
 
-        <CartIcon toggleCart={toggleCart} />
+        <LeftSide>
+          {isLogado && (
+            <UserInfo>
+              <Avatar>{iniciais}</Avatar>
+              <UserName>{nome}</UserName>
+            </UserInfo>
+          )}
+          <CartIcon toggleCart={toggleCart} />
+        </LeftSide>
       </HamburgerContainer>
     </HeaderContainer>
   );
