@@ -56,9 +56,9 @@ export default function Perfil () {
     async function carregar (){
       const headers = { Authorization: `Bearer ${token}` };
       const [pRes, fRes, pedRes] = await Promise.all ([
-        fetch ('http://localhost:3000/clientes/perfil', { headers }),
-        fetch ('http://localhost:3000/clientes/favoritos', { headers }),
-        fetch ('http://localhost:3000/clientes/pedidos', { headers })
+        fetch ('http://localhost:3001/clientes/perfil', { headers }),
+        fetch ('http://localhost:3001/clientes/favoritos', { headers }),
+        fetch ('http://localhost:3001/pedidos', { headers })
       ]);
       setPerfil(await pRes.json());
       setFavoritos(await fRes.json());
@@ -152,7 +152,7 @@ export default function Perfil () {
         </select>
       </Section>
 
-      <Button onClick={salvarPerfil}>Salvar
+      <Button onClick={salvarPerfil}>
         {salvo ? 'Salvo com sucesso!' : 'Salvar Alterações'}
       </Button>
 
