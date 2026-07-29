@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  width: 100%;
+ width: 100%;
   height: 70px;
   display: flex;
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
-  background: #fff;
+  background: var(--header-bg);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--shadow);
 `;
 
 export const HamburgerContainer = styled.div`

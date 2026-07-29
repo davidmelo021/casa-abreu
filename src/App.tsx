@@ -8,6 +8,7 @@ import { CartProvider } from './context/CartContext';
 import CartSidebar from './components/CartSidebar';
 import { AuthProvider } from './context/AuthContext';
 import { SearchProvider } from './context/SearchContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 function AppContent() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -40,11 +41,13 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+      <ThemeProvider>
       <SearchProvider>
         <CartProvider>
           <AppContent />
         </CartProvider>
         </SearchProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </AuthProvider>
   );

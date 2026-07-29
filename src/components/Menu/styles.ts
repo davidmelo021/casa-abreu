@@ -5,18 +5,18 @@ interface SidebarProps {
 }
 
 export const Container = styled.aside<SidebarProps>`
-  position: fixed;
-  top: 70px; /* igual à altura do header */
+position: fixed;
+  top: 70px;
   left: 0;
   width: ${({ open }) => (open ? '220px' : '0')};
-  height: calc(100vh - 70px); /* ocupa o restante da tela */
-  background-color: #000000ff;
+  height: calc(100vh - 70px);
+  background-color: var(--sidebar-bg);
   color: #fff;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease;
-  z-index: 999; /* abaixo do header */
+  z-index: 999;
 `;
 
 export const MenuItem = styled.div`
