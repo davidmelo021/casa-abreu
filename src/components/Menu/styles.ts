@@ -5,13 +5,12 @@ interface SidebarProps {
 }
 
 export const Container = styled.aside<SidebarProps>`
-position: fixed;
+  position: fixed;
   top: 70px;
   left: 0;
   width: ${({ open }) => (open ? '220px' : '0')};
   height: calc(100vh - 70px);
-  background-color: var(--sidebar-bg);
-  color: #fff;
+  background-color: #111;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -25,9 +24,12 @@ export const MenuItem = styled.div`
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  transition: background 0.3s;
+  color: #fff;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s;
 
   &:hover {
     background-color: #ff6600;
+    color: #fff;
   }
 `;
