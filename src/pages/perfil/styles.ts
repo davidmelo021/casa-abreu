@@ -8,14 +8,14 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   font-size: 2rem;
-  color: #222;
+  color: var(--text);
   margin-bottom: 30px;
 `;
 
 export const Section = styled.div`
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px var(--shadow);
   padding: 24px;
   margin-bottom: 24px;
 `;
@@ -31,7 +31,7 @@ export const SectionTitle = styled.h2`
 export const Label = styled.label`
   display: block;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--text-secondary);
   margin-bottom: 4px;
   margin-top: 12px;
 `;
@@ -39,14 +39,16 @@ export const Label = styled.label`
 export const Input = styled.input`
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 1rem;
   box-sizing: border-box;
+  background: var(--input-bg);
+  color: var(--text);
 
   &:disabled {
-    background: #f5f5f5;
-    color: #999;
+    background: var(--border);
+    color: var(--text-secondary);
   }
 
   &:focus {
@@ -78,10 +80,11 @@ export const Grid = styled.div`
 `;
 
 export const FavoritoCard = styled.div`
-  background: #f9f9f9;
+  background: var(--bg-card);
   border-radius: 8px;
   padding: 12px;
   text-align: center;
+  box-shadow: 0 1px 4px var(--shadow);
 
   img {
     width: 100%;
@@ -102,10 +105,11 @@ export const FavoritoCard = styled.div`
 `;
 
 export const PedidoCard = styled.div`
-  background: #f9f9f9;
+  background: var(--bg-card);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 4px var(--shadow);
 `;
 
 export const PedidoItem = styled.div`
@@ -113,5 +117,5 @@ export const PedidoItem = styled.div`
   justify-content: space-between;
   margin-bottom: 4px;
   font-size: 0.95rem;
-  color: #333;
+  color: var(--text);
 `;

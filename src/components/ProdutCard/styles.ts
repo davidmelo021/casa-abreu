@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
- background-color: var(--bg-card);
+  background-color: var(--bg-card);
   border-radius: 8px;
   box-shadow: 0 2px 5px var(--shadow);
   padding: 10px;
@@ -47,6 +47,6 @@ export const CardTitle = styled.h3`
 export const CardPrice = styled.p`
   font-size: 1rem;
   font-weight: 700;
-  color: #070a11;
+  color: #1e3a8a;
   margin: 0;
 `;
