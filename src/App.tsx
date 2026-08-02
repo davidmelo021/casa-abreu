@@ -8,17 +8,20 @@ import { CartProvider } from './context/CartContext';
 import CartSidebar from './components/CartSidebar';
 import { AuthProvider } from './context/AuthContext';
 import { SearchProvider } from './context/SearchContext';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 function AppContent() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openCart, setOpenCart] = useState(false);
+  const { darkMode } = useTheme();
 
   const toggleMenu = () => setOpenMenu(!openMenu);
   const toggleCart = () => setOpenCart(!openCart);
 
   return (
     <>
+      <GlobalStyle darkMode={darkMode} />
       <Header toggleMenu={toggleMenu} toggleCart={toggleCart} />
       <CartSidebar open={openCart} toggleCart={toggleCart} />
       <Sidebar open={openMenu} />
@@ -41,12 +44,12 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-      <ThemeProvider>
-      <SearchProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
-        </SearchProvider>
+        <ThemeProvider>
+          <SearchProvider>
+            <CartProvider>
+              <AppContent />
+            </CartProvider>
+          </SearchProvider>
         </ThemeProvider>
       </BrowserRouter>
     </AuthProvider>
