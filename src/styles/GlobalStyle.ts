@@ -18,5 +18,6 @@ export const GlobalStyle = createGlobalStyle<{ darkMode: boolean }>`
     --shadow: ${({ darkMode }) => darkMode ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'};
     --input-bg: ${({ darkMode }) => darkMode ? '#333333' : '#ffffff'};
     --header-bg: ${({ darkMode }) => darkMode ? '#242424' : '#ffffff'};
+    --icon-filter: ${({ darkMode }) => darkMode ? 'invert(1)' : 'none'};
   }
 `;

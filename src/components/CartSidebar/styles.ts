@@ -11,13 +11,13 @@ export const Overlay = styled.div<{ open: boolean }>`
 export const Container = styled.div<{ open: boolean }>`
   width: 380px;
   height: 100%;
-  background: #fafafa;
+  background: var(--bg-card);
   position: fixed;
   right: ${({ open }) => (open ? '0' : '-400px')};
   top: 0;
   transition: right 0.3s ease;
   z-index: 1000;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: -4px 0 20px var(--shadow);
   display: flex;
   flex-direction: column;
 `;
@@ -27,13 +27,13 @@ export const CartHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
 
   h2 {
     margin: 0;
     font-size: 1.3rem;
-    color: #222;
+    color: var(--text);
   }
 
   span {
@@ -94,10 +94,11 @@ export const ItemCard = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 10px;
   padding: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 4px var(--shadow);
+  border: 1px solid var(--border);
 `;
 
 export const ItemImage = styled.div`
@@ -124,7 +125,7 @@ export const ItemInfo = styled.div`
 
   p:first-child {
     font-weight: 600;
-    color: #222;
+    color: var(--text);
     margin: 0 0 4px 0;
     font-size: 0.95rem;
     white-space: nowrap;
@@ -186,9 +187,8 @@ export const RemoveButton = styled.button`
 
 export const Footer = styled.div`
   padding: 20px 24px;
-  background: #fff;
-  border-top: 1px solid #eee;
-  bottom: 0;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
   margin-top: auto;
 `;
 
@@ -200,13 +200,13 @@ export const Footer = styled.div`
 
   span:first-child {
     font-size: 1rem;
-    color: #555;
+    color: var(--text-secondary);
   }
 
   span:last-child {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #222;
+    color: var(--text);
   }
 `;
 

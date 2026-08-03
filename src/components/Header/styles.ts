@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
- width: 100%;
+width: 100%;
   height: 70px;
   display: flex;
   align-items: center;
@@ -19,6 +19,7 @@ export const HamburgerContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 export const LeftSide = styled.div`
  display: flex;
@@ -31,6 +32,7 @@ export const HamburgerImage = styled.img`
   height: 28px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  filter: var(--icon-filter);
 
   &:hover {
     transform: scale(1.1);
@@ -54,7 +56,7 @@ export const Logo = styled.img.attrs({ alt: "Logo da empresa" })`
 export const CompanyName = styled.h1`
   font-size: 1rem;
   font-weight: 600;
-  color: #222;
+  color: var(--text);
   margin: 0;
 `;
 
@@ -72,14 +74,15 @@ export const Container = styled.header`
 export const SearchBar = styled.div`
   display: flex;
   align-items: center;
-  background: #f3f3f3;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 6px 14px;
   gap: 8px;
   flex: 1;
   max-width: 400px;
   margin: 0 20px;
-  margin-top: 12px;
+  margin-top: 8px;
 
   input {
     border: none;
@@ -87,15 +90,15 @@ export const SearchBar = styled.div`
     outline: none;
     font-size: 0.95rem;
     width: 100%;
-    color: #333;
+    color: var(--text);
 
     &::placeholder {
-      color: #aaa;
+      color: var(--text-secondary);
     }
   }
 
   span {
-    color: #aaa;
+    color: var(--text-secondary);
     font-size: 1rem;
   }
 `;
@@ -123,7 +126,7 @@ export const Avatar = styled.div`
 export const UserName = styled.span`
   font-size: 0.9rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text);
   white-space: nowrap;
 
   @media (max-width: 600px) {
