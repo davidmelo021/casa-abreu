@@ -1,4 +1,4 @@
-import { Card, CardImage, CardTitle, CardPrice } from './styles';
+import { Card, CardImage, CardTitle, CardPrice ,Badge, CardWrapper} from './styles';
 import { useCart } from '../../context/CartContext';
 
 interface ProductCardProps {
@@ -9,10 +9,13 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ id, image, title, price }: ProductCardProps) {
-  const {addToCart} = useCart();
+  const {addToCart, cart} = useCart();
   const numericPrice = Number (
     price.replace("R$","").replace(/\./g, "").replace(",",".").trim()
   );
+
+  const itemNoCarrinho = cart.find(item => item.id === id);
+  const quantidade = itemNoCarrinho ? itemNoCarrinho.quantity : 0
 
   function handleAdd(){
     addToCart({
@@ -25,6 +28,8 @@ export function ProductCard({ id, image, title, price }: ProductCardProps) {
   }
 
   return (
+  <CardWrapper>
+    {quantidade > 0 && <Badge>{quantidade}</Badge>}
     <Card>
       <CardImage src={image} alt={title} />
       <CardTitle>{title}</CardTitle>
@@ -34,5 +39,6 @@ export function ProductCard({ id, image, title, price }: ProductCardProps) {
         Adicionar ao carrinho
       </button>
     </Card>
+  </CardWrapper>
   );
 }

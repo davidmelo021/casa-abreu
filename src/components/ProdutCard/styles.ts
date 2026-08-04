@@ -50,3 +50,25 @@ export const CardPrice = styled.p`
   color: #1e3a8a;
   margin: 0;
 `;
+
+export const CardWrapper = styled.div`
+  position: relative;
+`;
+
+export const Badge = styled.span`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff6600;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+`;
