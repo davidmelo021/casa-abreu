@@ -12,7 +12,7 @@ import MachadoImg from '../../assets/machado.webp';
 
 export default function Home() {
   const products = [
-    { id:1,image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 25,00' },
+    { id:1,image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 30,00' },
     { id:2,image: TijoloImg, title: 'Tijolo 6 furos', price: 'R$ 1,50' },
     { id:3,image: MadeiraImg, title: 'Madeira Tratada', price: 'R$ 12,00' },
     { id:4,image: PregoImg,title:'Pregos',price:'R$0,60'},
