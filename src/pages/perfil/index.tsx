@@ -44,6 +44,11 @@ export default function Perfil() {
   const [favoritos, setFavoritos] = useState<Favorito[]>([]);
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
   const [salvo, setSalvo] = useState(false);
+  const [senhaAtual, setSenhaAtual] = useState('');
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [erroSenha, setErroSenha] = useState('');
+  const [senhaAtualizada, setSenhaAtualizada] = useState(false);
 
   useEffect(() => {
     async function carregar() {
@@ -80,6 +85,46 @@ export default function Perfil() {
     });
     setFavoritos(prev => prev.filter(f => f.id !== id));
   }
+
+  async function atualizarSenha() {
+  setErroSenha('');
+
+  if (novaSenha !== confirmarSenha) {
+    setErroSenha('As senhas não coincidem!');
+    return;
+  }
+
+  if (novaSenha.length < 6) {
+    setErroSenha('A nova senha deve ter pelo menos 6 caracteres!');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:3001/clientes/senha', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ senhaAtual, novaSenha }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setErroSenha(data.message);
+      return;
+    }
+
+    setSenhaAtualizada(true);
+    setSenhaAtual('');
+    setNovaSenha('');
+    setConfirmarSenha('');
+    setTimeout(() => setSenhaAtualizada(false), 3000);
+  } catch {
+    setErroSenha('Erro ao atualizar senha. Tente novamente.');
+  }
+}
 
   return (
     <Container>
@@ -169,6 +214,40 @@ export default function Perfil() {
           </button>
         </div>
       </Section>
+
+      <Section>
+  <SectionTitle>Alterar Senha</SectionTitle>
+  <Label>Senha Atual</Label>
+  <Input
+    type="password"
+    placeholder="Digite sua senha atual"
+    value={senhaAtual}
+    onChange={e => setSenhaAtual(e.target.value)}
+  />
+  <Label>Nova Senha</Label>
+  <Input
+    type="password"
+    placeholder="Digite a nova senha"
+    value={novaSenha}
+    onChange={e => setNovaSenha(e.target.value)}
+  />
+  <Label>Confirmar Nova Senha</Label>
+  <Input
+    type="password"
+    placeholder="Confirme a nova senha"
+    value={confirmarSenha}
+    onChange={e => setConfirmarSenha(e.target.value)}
+  />
+  {erroSenha && (
+    <p style={{ color: 'red', fontSize: '0.9rem', marginTop: '8px' }}>{erroSenha}</p>
+  )}
+  <Button
+    onClick={atualizarSenha}
+    style={{ marginTop: '16px' }}
+  >
+    {senhaAtualizada ? '✅ Senha atualizada!' : 'Atualizar Senha'}
+  </Button>
+</Section>
 
       <Button onClick={salvarPerfil}>
         {salvo ? '✅ Salvo com sucesso!' : 'Salvar Alterações'}
