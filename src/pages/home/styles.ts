@@ -54,3 +54,36 @@ export const ProductsGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+export const BannerContainer = styled.div`
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  height: 200px;
+  cursor: pointer;
+`;
+
+export const BannerSlide = styled.div<{bg: string}>`
+  position: absolute;
+  inset: 0;
+  background: ${({bg}) =>bg};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px;
+  animation: ${slideIn} 0.5s ease;
+`;
+
+export const BannerTag = styled.span`
+  background: rgba(255,255,255,0.25);
+  color : #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px; 
+`;
