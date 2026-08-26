@@ -87,3 +87,41 @@ export const BannerTag = styled.span`
   text-transform: uppercase;
   letter-spacing: 1px; 
 `;
+
+export const BannerTitle = styled.h2`
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 8px 0;
+`;
+
+export const BannerSubtitle = styled.p`
+  font-size: 1rem;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 16px 0;
+`;
+
+export const BannerButton = styled.button`
+  background: #fff;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform  0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+    }
+`;
+
+export const BannerDots = styled.div`
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  display: flex;
+  gap: 6px;
+`;
+
