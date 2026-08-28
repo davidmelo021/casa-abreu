@@ -11,6 +11,31 @@ import MachadoImg from '../../assets/machado.webp';
 
 
 export default function Home() {
+
+  const banners = [
+    {
+      bg:'linear-gradient(135deg, #ff6600 0%, #ff9500 100%)',
+      tag: 'Oferta especial',
+      title: 'Cimento com 15% OFF',
+      subtitle: 'Aproveite a promoção por tempo limitado e garanta o melhor preço para sua obra.',
+      button: 'Ver Produtos',
+      route: '/products',
+    },
+
+    {
+      bg:'linear-gradient(135deg, #00ccff 0%, #0099ff 100%)',
+      tag: 'Novidade',
+      title: 'Chegou a nova linha de ferramentas',
+      subtitle: 'Descubra a nova linha de ferramentas de alta qualidade para sua obra.',
+      button: 'Ver Ferramentas',
+      route: '/products',
+    },
+
+    {
+      
+    }
+  ]
+
   const products = [
     { id:1,image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 30,00' },
     { id:2,image: TijoloImg, title: 'Tijolo 6 furos', price: 'R$ 1,50' },
@@ -22,27 +47,5 @@ export default function Home() {
     { id:8,image: MachadoImg,title:'Machado',price:'R$300,90'}
   ];
 
-  return (
-    <Container>
-      
-      <WelcomeSection>
-        <Title>Bem-vindo à Casa Abreu</Title>
-        <Subtitle>Encontre tudo para sua obra com qualidade e bom preço.</Subtitle>
-      </WelcomeSection>
-
-      
-      <h2>Produtos em Destaque</h2>
-      <ProductsGrid>
-        {products.map((p, index) => (
-          <ProductCard 
-            key={index} 
-            id={p.id}
-            image={p.image} 
-            title={p.title} 
-            price={p.price} 
-          />
-        ))}
-      </ProductsGrid>
-    </Container>
-  );
+ 
 }

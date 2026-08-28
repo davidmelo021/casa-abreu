@@ -125,3 +125,13 @@ export const BannerDots = styled.div`
   gap: 6px;
 `;
 
+export const Dot = styled.button<{active: boolean}>`
+  width: ${({active}) => active ? '20px' : '8px'};
+  height: 8px;
+  background: ${({active}) => active ? '#fff' : 'rgba(255,255,255,0.5)'};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s;
+`;
