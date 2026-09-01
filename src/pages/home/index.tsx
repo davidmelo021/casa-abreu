@@ -1,4 +1,6 @@
-import { Container, WelcomeSection, Title, Subtitle, ProductsGrid } from './styles';
+import { useState,useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import { Container, WelcomeSection, Title, Subtitle, ProductsGrid, BannerContainer, BannerSlide, BannerTitle,BannerTag, BannerSubtitle, BannerButton, BannerDots, Dot} from './styles';
 import { ProductCard } from '../../components/ProdutCard';
 import CimentoImg from '../../assets/cimento_cp_ii_e_32_50kg_csn_1079_1_20190801135404.webp';
 import TijoloImg  from '../../assets/Qual_o_melhor_tijolo_para_sua_obra__4.webp';
@@ -10,7 +12,6 @@ import PaImg from '../../assets/D_NQ_NP_682038-MLU73331788328_122023-O.webp';
 import MachadoImg from '../../assets/machado.webp';
 
 
-export default function Home() {
 
   const banners = [
     {
@@ -32,9 +33,26 @@ export default function Home() {
     },
 
     {
-      
-    }
-  ]
+      bg: 'linear-gradient(135deg, #166534 0%, #16a34a 100%)',
+      tag: 'Jardins',
+      title: 'Tudo para o seu jardim',
+      subtitle: 'Durabilidade e qualidade para o seu jardim',
+      button: 'Ver Produtos',
+      route: '/products',
+    },
+  ];
+
+  export default function Home() {
+    const [bannerActive,setBannerActive] = useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() =>{
+      const interval = setInterval (() =>{
+        setBannerActive((prev) => (prev + 1) % banners.length);
+      },4000);
+
+      return () => clearInterval(interval);
+    },[]);
 
   const products = [
     { id:1,image: CimentoImg, title: 'Cimento 50kg', price: 'R$ 30,00' },
@@ -47,5 +65,34 @@ export default function Home() {
     { id:8,image: MachadoImg,title:'Machado',price:'R$300,90'}
   ];
 
+  const banner = banners[bannerActive];
+
+  return (
+    <Container>
+      <WelcomeSection>
+        <Title>Bem vindo a Casa Abreu</Title>
+        <Subtitle>Encontre os melhores produtos para sua obra</Subtitle>
+      </WelcomeSection>
+
+      <BannerContainer>
+        <BannerSlide key={bannerActive} bg={banner.bg}>
+          <BannerTag>{banner.tag}</BannerTag>
+          <BannerTitle>{banner.title}</BannerTitle>
+          <BannerSubtitle>{banner.subtitle}</BannerSubtitle>
+          <BannerButton onClick={() => navigate(banner.route)}>
+            {banner.button}
+          </BannerButton>
+        </BannerSlide>
+
+        <BannerDots>
+          {banners.map((_,i) => (
+            <Dot key={i} active={i===bannerActive} onClick={() => setBannerActive(i)}/>
+          ))}
+        </BannerDots>
+      </BannerContainer>
+
+      
+    </Container>
+  )
  
 }
