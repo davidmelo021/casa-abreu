@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const slideIn = keyframes`
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+`;
 
 export const Container = styled.div`
   padding: 20px;
@@ -134,4 +139,8 @@ export const Dot = styled.button<{active: boolean}>`
   cursor: pointer;
   padding: 0;
   transition: all 0.3s;
+`;
+
+export const ArrowButton = styled.button<{direction: 'left' | 'right'}>`
+  
 `;

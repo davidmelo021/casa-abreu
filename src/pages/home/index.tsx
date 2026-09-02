@@ -91,8 +91,19 @@ import MachadoImg from '../../assets/machado.webp';
         </BannerDots>
       </BannerContainer>
 
-      
+      <h2>Produtos em destaque!</h2>
+      <ProductsGrid>
+        {products.map((p) =>(
+          <ProductCard
+            key={p.id}
+            id={p.id}
+            image={p.image}
+            title={p.title}
+            price={p.price}
+          />
+        ))}
+      </ProductsGrid>
     </Container>
-  )
+  );
  
 }
