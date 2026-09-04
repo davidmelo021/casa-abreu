@@ -1,6 +1,7 @@
 import { useState,useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import { Container, WelcomeSection, Title, Subtitle, ProductsGrid, BannerContainer, BannerSlide, BannerTitle,BannerTag, BannerSubtitle, BannerButton, BannerDots, Dot} from './styles';
+import { Container, WelcomeSection, Title, Subtitle, ProductsGrid, BannerContainer, BannerSlide, BannerTitle,BannerTag, BannerSubtitle, BannerButton, BannerDots, 
+Dot,ArrowButton} from './styles';
 import { ProductCard } from '../../components/ProdutCard';
 import CimentoImg from '../../assets/cimento_cp_ii_e_32_50kg_csn_1079_1_20190801135404.webp';
 import TijoloImg  from '../../assets/Qual_o_melhor_tijolo_para_sua_obra__4.webp';

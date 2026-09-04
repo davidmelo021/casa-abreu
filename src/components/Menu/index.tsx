@@ -20,17 +20,11 @@ export function Sidebar({ open }: SidebarProps) {
         <MenuItem onClick={() => navigate('/perfil')}>Perfil</MenuItem>
       )}
 
-      {isLogado && (
-        <MenuItem onClick={() => navigate('/relatorio')}>📊 Relatório</MenuItem>
-      )}
-   
+     
       {isLogado && (
          <MenuItem onClick={logout} style={{ color: '#ff6600' }}>Sair</MenuItem>
       )}
 
-      {isLogado && (
-  <MenuItem onClick={() => navigate('/perfil')}>Perfil</MenuItem>
-)}
     </Container>
   );
 }

@@ -142,5 +142,25 @@ export const Dot = styled.button<{active: boolean}>`
 `;
 
 export const ArrowButton = styled.button<{direction: 'left' | 'right'}>`
-  
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  ${({direction}) => direction === 'left' ? 'left: 16px;' : 'right: 16px;'}
+  background: rgba(255,255,255,0.3);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: background 0.2s;
+  z-index: 10;
+
+  &:hover {
+    background: rgba(255,255,255,0.5);
+  }
 `;
