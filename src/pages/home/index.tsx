@@ -76,6 +76,12 @@ import MachadoImg from '../../assets/machado.webp';
       </WelcomeSection>
 
       <BannerContainer>
+        <ArrowButton 
+          direction="left"
+          onClick={() => setBannerActive((prev) => (prev - 1 + banners.length) % banners.length)}>
+            ←
+        </ArrowButton>
+
         <BannerSlide key={bannerActive} bg={banner.bg}>
           <BannerTag>{banner.tag}</BannerTag>
           <BannerTitle>{banner.title}</BannerTitle>
@@ -84,6 +90,11 @@ import MachadoImg from '../../assets/machado.webp';
             {banner.button}
           </BannerButton>
         </BannerSlide>
+        <ArrowButton 
+          direction="right"
+          onClick={() => setBannerActive((prev) => (prev + 1) % banners.length)}>
+           →
+        </ArrowButton>
 
         <BannerDots>
           {banners.map((_,i) => (

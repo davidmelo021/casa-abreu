@@ -63,7 +63,6 @@ export const ProductsGrid = styled.div`
 export const BannerContainer = styled.div`
   position: relative;
   border-radius: 16px;
-  overflow: hidden;
   margin-bottom: 32px;
   height: 200px;
   cursor: pointer;
@@ -79,6 +78,7 @@ export const BannerSlide = styled.div<{bg: string}>`
   justify-content: center;
   padding: 40px;
   animation: ${slideIn} 0.5s ease;
+  overflow: hidden;
 `;
 
 export const BannerTag = styled.span`
@@ -125,7 +125,8 @@ export const BannerButton = styled.button`
 export const BannerDots = styled.div`
   position: absolute;
   bottom: 12px;
-  right: 16px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 6px;
 `;
@@ -157,6 +158,7 @@ export const ArrowButton = styled.button<{direction: 'left' | 'right'}>`
   cursor: pointer;
   font-size: 1.2rem;
   color: #fff;
+  font-weight: bold;
   transition: background 0.2s;
   z-index: 10;
 
