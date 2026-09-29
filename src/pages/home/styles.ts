@@ -143,26 +143,26 @@ export const Dot = styled.button<{active: boolean}>`
 `;
 
 export const ArrowButton = styled.button<{direction: 'left' | 'right'}>`
-  position: absolute;
+position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  ${({direction}) => direction === 'left' ? 'left: 16px;' : 'right: 16px;'}
-  background: rgba(255,255,255,0.3);
-  border: none;
+  ${({ direction }) => direction === 'left' ? 'left: 16px;' : 'right: 16px;'}
+  background: rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,255,255,0.7);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #fff;
   font-weight: bold;
   transition: background 0.2s;
   z-index: 10;
 
   &:hover {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.6);
   }
 `;

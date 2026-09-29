@@ -90,6 +90,7 @@ import MachadoImg from '../../assets/machado.webp';
             {banner.button}
           </BannerButton>
         </BannerSlide>
+       
         <ArrowButton 
           direction="right"
           onClick={() => setBannerActive((prev) => (prev + 1) % banners.length)}>
