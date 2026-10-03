@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useCart } from "../../context/CartContext";
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -20,11 +20,42 @@ export default function CartSidebar({ open, toggleCart }: Props) {
     const { token, isLogado } = useAuth();
     const navigate = useNavigate();
 
+    const [cupom, setCupom] = useState('');
+    const [desconto, setDesconto] = useState(0);
+    const [erroCupom, setErroCupom] = useState('');
+    const [cupomAplicado, setCupomAplicado] = useState('');
+
+
     cartRef.current = cart;
 
     const totalCalculado = cartRef.current.reduce(
         (acc, item) => acc + item.price * item.quantity, 0
     );
+
+    async function aplicarCupom() {
+        setErroCupom('');
+        try {
+            const response = await fetch('http://localhost:3001/cupom/validar', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ codigo: cupom }),
+            });
+
+            const data = await response.json();
+
+            if(!response.ok) {
+                setErroCupom(data.message);
+                return;
+            }
+
+            setDesconto(data.desconto);
+            setCupomAplicado(data.codigo);
+        } catch {
+            setErroCupom('Erro ao validar cupom. Tente novamente.');
+        }
+    }
+
+
 
   async function finalizarCompra() {
     if (!isLogado) {
@@ -112,13 +143,7 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                         </ItemsList>
 
                         <Footer>
-                            <TotalRow>
-                                <span>Total</span>
-                                <span>R$ {totalCalculado.toFixed(2)}</span>
-                            </TotalRow>
-                            <CheckoutButton onClick={finalizarCompra}>
-                                Finalizar Compra
-                            </CheckoutButton>
+                            
                         </Footer>
                     </>
                 )}
