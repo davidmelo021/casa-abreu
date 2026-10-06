@@ -143,7 +143,29 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                         </ItemsList>
 
                         <Footer>
-                            
+                            <div style={{ marginBottom: '16px' }}>
+                                {!cupomAplicado ? (
+                                    <>
+                                        <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+                                            <input
+                                                type="text"
+                                                placeholder="Digite o cupom"
+                                                value={cupom}
+                                                onChange={(e) => setCupom(e.target.value.toUpperCase())}
+                                                style = {{
+                                                    flex: 1,
+                                                    padding: '10px',
+                                                    border: '1px solid var(--border-color)',
+                                                    borderRadius: '8px',
+                                                    background: 'var(--input-bg)',
+                                                    color: 'var(--text)',
+                                                    fontSize: '0.9rem',
+                                                }}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         </Footer>
                     </>
                 )}
