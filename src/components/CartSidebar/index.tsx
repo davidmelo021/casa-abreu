@@ -32,6 +32,8 @@ export default function CartSidebar({ open, toggleCart }: Props) {
         (acc, item) => acc + item.price * item.quantity, 0
     );
 
+    const totalFinal = totalCalculado * (1 - desconto / 100);
+
     async function aplicarCupom() {
         setErroCupom('');
         try {
@@ -83,7 +85,7 @@ export default function CartSidebar({ open, toggleCart }: Props) {
         if (!response.ok) throw new Error('Erro ao finalizar compra');
 
         const data = await response.json();
-        const total = totalCalculado;
+        const total = totalFinal;
         const itensSalvos = [...cartRef.current];
 
         clearCart();
@@ -162,10 +164,75 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                                                     fontSize: '0.9rem',
                                                 }}
                                             />
+
+                                            <button
+                                                onClick={aplicarCupom}
+                                                style = {{
+                                                    background: '#ff6600',
+                                                    color: '#fff',
+                                                    border: 'none',
+                                                    borderRadius: '8px',
+                                                    padding: '10px 14px',
+                                                    cursor: 'pointer',
+                                                    fontWeight: '600',
+                                                    fontSize: '0.9rem',
+                                                }}
+                                            >
+                                                Aplicar
+                                            </button>
                                         </div>
+
+                                        {erroCupom &&(
+                                            <p style={{ color: 'red', fontSize: '0.8rem',margin: 0  }}>{erroCupom}</p>
+                                            )}
                                     </>
+                                ):(
+                                    <div style = {{
+                                        background: '#f0fdf4',
+                                        border: '1px solid #86efac',
+                                        borderRadius: '8px',
+                                        padding: '10px 14px',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                    }}>
+                                        <span style={{ color: '#16a34a', fontWeight: '600', fontSize: '0.9rem' }}>
+                                            ✅ {cupomAplicado} — {desconto}% OFF
+                                        </span>
+
+                                        <button
+                                            onClick= {() => {setDesconto(0); setCupomAplicado('');}}
+                                            style = {{background:'none', border: 'none', color: '#999', cursor: 'pointer', fontSize: '1rem'}}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
                                 )}
                             </div>
+
+                            <TotalRow>
+                                <span>Total:</span>
+                                <div>
+                                    {desconto > 0 && (
+                                        <div style={{textAlign: 'right'}}>
+                                            <span style = {{fontSize: '0.85rem', color: '#999', textDecoration: 'line-through'}}>
+                                                R$ {totalCalculado.toFixed(2)}
+                                            </span>
+
+                                            <span style={{fontSize: '0.75rem', color: '#16a34a', marginLeft: '6px'}}>
+                                                -{desconto}%
+                                            </span>
+                                            
+                                        </div>
+                                    )}
+                                    <span>R$ {totalFinal.toFixed(2)}</span>
+                                    
+                                </div>
+                            </TotalRow>
+
+                            <CheckoutButton onClick={finalizarCompra}>
+                                Finalizar Compra
+                            </CheckoutButton>
                         </Footer>
                     </>
                 )}
