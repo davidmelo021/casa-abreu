@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {useCart} from '../../context/CartContext';
 import {useAuth} from '../../context/AuthContext';
 import {Container, Title, Section,SectionTitle,Label,
-    Input,Grid2,
+    Input,Grid2,PaymentsTabs,PaymentTab,CardBrands,CardBrand,PixBox,BoletoBox,ResumeContainer,
 } from './styles';
 
 type Pagamento = 'credito' | 'debito' | 'pix'| 'boleto';
@@ -97,8 +97,91 @@ export default function Checkout() {
                     <Grid2>
                         <div>
                             <Label>CPF</Label>
+                            <Input value={cpf} onChange={(e) => setCpf(e.target.value)} placeholder="000.000.000-00" maxLength={14} />
+                        </div>
+
+                        <div>
+                            <Label>Email</Label>
+                            <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seu@email.com" type="email"/>
                         </div>
                     </Grid2>
+                </Section>
+
+                <Section>
+                    <SectionTitle>Endereço de Entrega</SectionTitle>
+                    <Label>Endereço</Label>
+                    
+                    <Label>CEP *</Label>
+                    <Input value={cep} onChange={e => setCep(e.target.value)} placeholder="00000-000" maxLength={9} />
+                    <Input value={endereco} onChange={(e) => setEndereco(e.target.value)} placeholder="Nome da rua" />
+                    
+                    <Grid2>
+                        <div>
+                            <Label>Número</Label>
+                            <Input value={numero} onChange={(e) => setNumero(e.target.value)} placeholder="N°" />
+                        </div>
+                        <div>
+                            <Label>Bairro</Label>
+                            <Input value={bairro} onChange={(e) => setBairro(e.target.value)} placeholder="Bairro" />
+                        </div>
+                    </Grid2>
+                    <Grid2>
+                        <div>
+                            <Label>Cidade</Label>
+                            <Input value={cidade} onChange={(e) => setCidade(e.target.value)} placeholder="Cidade" />
+                        </div>
+                        <div>
+                            <Label>Estado</Label>
+                            <Input value={estado} onChange={(e) => setEstado(e.target.value)} placeholder="UF" maxLength={2} />
+                        </div>
+                    </Grid2>
+                </Section>
+
+                <Section>
+                    <SectionTitle>Forma de Pagamento</SectionTitle>
+                    <PaymentsTabs>
+                        <PaymentTab active={pagamento === 'credito'} onClick={() => setPagamento('credito')}>
+                          💳 Crédito
+                        </PaymentTab>
+
+                         <PaymentTab active={pagamento === 'debito'} onClick={() => setPagamento('debito')}>
+                          💳 Débito
+                        </PaymentTab>
+
+                         <PaymentTab active={pagamento === 'boleto'} onClick={() => setPagamento('boleto')}>
+                          � Boleto
+                        </PaymentTab>
+
+                         <PaymentTab active={pagamento === 'pix'} onClick={() => setPagamento('pix')}>
+                            📱 Pix
+                        </PaymentTab>
+                    </PaymentsTabs>
+
+                    {(pagamento === 'credito' || pagamento === 'debito') && (
+                        <>
+                            <Label>Bandeira</Label>
+                            <CardBrands>
+                                {['visa','mastercard','elo','hipercard'].map(b => (
+                                    <CardBrand key={b} selected={bandeira === b} onClick={() => setBandeira(b)}>
+                                        {b === 'visa' && 'Visa'}
+                                        {b === 'mastercard' && 'Mastercard'}
+                                        {b === 'elo' && 'Elo'}
+                                        {b === 'hipercard' && 'HiperCard'}
+                                    </CardBrand>
+                                ))}
+                            </CardBrands>
+
+                            <Label>Número do Cartão</Label>
+                            <Input value={numeroCartao} onChange={(e) => setNumeroCartao(e.target.value)} placeholder="0000 0000 0000 0000" maxLength={19} />
+
+                            <Label>Nome no Cartão</Label>
+                            <Input value={nameCartao} onChange={(e) => setNameCartao(e.target.value)} placeholder="Nome como no cartão" />
+
+                            <Grid2>
+                                
+                            </Grid2>
+                        </>
+                    )}
                 </Section>
             </div>
         </Container>
