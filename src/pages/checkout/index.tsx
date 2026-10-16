@@ -172,18 +172,86 @@ export default function Checkout() {
                             </CardBrands>
 
                             <Label>Número do Cartão</Label>
-                            <Input value={numeroCartao} onChange={(e) => setNumeroCartao(e.target.value)} placeholder="0000 0000 0000 0000" maxLength={19} />
+                            <Input value={numeroCartao} 
+                                   onChange={(e) => setNumeroCartao(e.target.value)} 
+                                   placeholder="0000 0000 0000 0000" maxLength={19} />
 
                             <Label>Nome no Cartão</Label>
-                            <Input value={nameCartao} onChange={(e) => setNameCartao(e.target.value)} placeholder="Nome como no cartão" />
+                            <Input value={nameCartao} 
+                                   onChange={(e) => setNameCartao(e.target.value)} 
+                                   placeholder="Nome como no cartão" />
 
                             <Grid2>
-                                
+                                <div>
+                                    <Label>Validade</Label>
+                                    <input 
+                                        value={validadeCartao} 
+                                        onChange={(e) => setValidadeCartao(e.target.value)} 
+                                        placeholder="MM/AA" 
+                                        maxLength={5}
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label>CVV</Label>
+                                    <Input value={cvvCartao} 
+                                           onChange={(e) => setCvvCartao(e.target.value)} 
+                                           placeholder="000" maxLength={4} />
+                                </div>
                             </Grid2>
+
+                            {pagamento === 'credito' && (
+                                <>
+                                    <Label>Parcelas</Label>
+                                    <SelectInput value={parcelas} onChange={(e) => setParcelas(Number(e.target.value))}>
+                                        {Array.from({length: 12},(_,i) => i + 1).map(n = >(
+                                            <option key = {n} value = {n}>
+                                                {n} x de R$ {(total/n).toFixed(2)} {n === 1 ? '(sem juros)' : n <= 6 ? '(sem juros)' : '(com juros)'}
+                                            </option>
+                                        ))}   
+                                    </SelectInput>
+                                </>
+                            )}
                         </>
+                    )}
+
+                    {pagamento === 'pix' && (
+                        <PixBox>
+                            <div style = {{fontSize:'3rem'}}></div>
+                            <h3 style = {{margin:'8px 0 4px'}}>Pagamento via PIX</h3>
+                            <p>Abra o app do seu banco e escaneie o código QR para concluir o pagamento.</p>
+                            <p>Aprovação imediata</p>
+                        </PixBox>
+                    )}
+
+                    {pagamento === 'boleto' && (
+                        <BoletoBox>
+                            <div style = {{fontSize:'3rem'}}></div>
+                            <h3 style = {{margin:'8px 0 4px'}}>Pagamento via Boleto</h3>
+                            <p>Um boleto será gerado para você. Pague até a data de vencimento para concluir a compra.</p>
+                            <p>Aprovação em até 3 dias úteis</p>
+                        </BoletoBox>
                     )}
                 </Section>
             </div>
+
+            <ResumeContainer>
+                <ResumeCard>
+                    <ResumeTitle>Resumo do Pedido</ResumeTitle>
+
+                    {cart.map(item => (
+                        <ResumeItem key = {item.id}>
+                            <img src={item.image} alt={item.name} />
+                            <ResumeItemInfo>
+                                <p>{item.name}</p>
+                            </ResumeItemInfo>
+                            <ResumeItemPrice>R$ {(item.price * item.quantity).toFixed(2)}</ResumeItemPrice>
+                        </ResumeItem>
+                    ))}
+
+                    <ResumeTotal><ResumeTotal/>
+                </ResumeCard>
+            </ResumeContainer>
         </Container>
     )
 }
