@@ -5,6 +5,7 @@ import Products from "../pages/products";
 import Perfil from "../pages/perfil";
 import Cadastro from "../pages/cadastro";
 import Confirmacao from "../pages/confirmacao";
+import Checkout from "../pages/checkout";
 
 export function AppRoutes() {
   return (
@@ -15,6 +16,7 @@ export function AppRoutes() {
       <Route path="/perfil" element={<Perfil />} />
       <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/confirmacao" element={<Confirmacao />} />
+      <Route path="/checkout" element={<Checkout />} />
     </Routes>
   );
 }

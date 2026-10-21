@@ -230,8 +230,8 @@ export default function CartSidebar({ open, toggleCart }: Props) {
                                 </div>
                             </TotalRow>
 
-                            <CheckoutButton onClick={finalizarCompra}>
-                                Finalizar Compra
+                            <CheckoutButton onClick={() =>{toggleCart(); navigate('/checkout');}}>
+                                Ir para o pagamento
                             </CheckoutButton>
                         </Footer>
                     </>

@@ -4,6 +4,8 @@ import {useCart} from '../../context/CartContext';
 import {useAuth} from '../../context/AuthContext';
 import {Container, Title, Section,SectionTitle,Label,
     Input,Grid2,PaymentsTabs,PaymentTab,CardBrands,CardBrand,PixBox,BoletoBox,ResumeContainer,
+    Card,ResumeItem,ResumeItemInfo,ResumeItemPrice,ResumeTotal,ResumeTotalRow,
+    ResumeTotalFinal,FinalizarButton,SelectInput
 } from './styles';
 
 type Pagamento = 'credito' | 'debito' | 'pix'| 'boleto';
@@ -53,7 +55,7 @@ export default function Checkout() {
                 quantity: item.quantity,
             }));
 
-            const response = await fetch('http://localhost:3000pedidos', {
+            const response = await fetch('http://localhost:3001/pedidos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,7 +70,7 @@ export default function Checkout() {
             const itensSalvo = [...cart];
 
             clearCart();
-            navigate('confirmacao', {
+            navigate('/confirmacao', {
                 state: {
                     pedidoId : data.pedidoId,
                     itens: itensSalvo,
@@ -76,7 +78,7 @@ export default function Checkout() {
                     pagamento,
                     bandeira: pagamento ==='credito' || pagamento === 'debito' ? bandeira : null,
                     parcelas: pagamento ==='credito' ? parcelas : 1,
-                    valorParcela: pagamento ==='credito' ? valorParcela : null,
+                    valorParcela: pagamento ==='credito' ? parcela : null,
                 }
             });
         } catch (error) {
@@ -204,7 +206,7 @@ export default function Checkout() {
                                 <>
                                     <Label>Parcelas</Label>
                                     <SelectInput value={parcelas} onChange={(e) => setParcelas(Number(e.target.value))}>
-                                        {Array.from({length: 12},(_,i) => i + 1).map(n = >(
+                                        {Array.from({length: 12},(_,i) => i + 1).map(n =>(
                                             <option key = {n} value = {n}>
                                                 {n} x de R$ {(total/n).toFixed(2)} {n === 1 ? '(sem juros)' : n <= 6 ? '(sem juros)' : '(com juros)'}
                                             </option>
@@ -236,8 +238,8 @@ export default function Checkout() {
             </div>
 
             <ResumeContainer>
-                <ResumeCard>
-                    <ResumeTitle>Resumo do Pedido</ResumeTitle>
+                <Card>
+                    <Title>Resumo do Pedido</Title>
 
                     {cart.map(item => (
                         <ResumeItem key = {item.id}>
@@ -249,9 +251,35 @@ export default function Checkout() {
                         </ResumeItem>
                     ))}
 
-                    <ResumeTotal><ResumeTotal/>
-                </ResumeCard>
+                    <ResumeTotal>
+                        <ResumeTotalRow>
+                            <span>Subtotal:</span>
+                            <span>R$ {total.toFixed(2)}</span>
+                        </ResumeTotalRow>
+
+                        <ResumeTotalRow>
+                            <span>Frete</span>
+                            <span style={{color:'#16a34a'}}>Grátis</span>
+                        </ResumeTotalRow>
+
+                        {pagamento === 'credito' && (
+                            <ResumeTotalRow>
+                                <span>Parcelamento</span>
+                                <span>{parcelas}x de R$ {parcela}</span>
+                            </ResumeTotalRow>
+                        )}
+
+                        <ResumeTotalFinal>
+                            <span>Total:</span>
+                            <span>R$ {total.toFixed(2)}</span>
+                        </ResumeTotalFinal>
+                    </ResumeTotal>
+
+                    <FinalizarButton onClick={finalizar} disabled={cart.length === 0}>
+                        Confirmar Pedido
+                    </FinalizarButton>
+                </Card>
             </ResumeContainer>
         </Container>
-    )
+    );
 }
