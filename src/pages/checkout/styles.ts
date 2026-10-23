@@ -73,7 +73,7 @@ export const PaymentsTabs = styled.div`
   flex-wrap: wrap;
 `;
 
-export const PaymentTab = styled.div`
+export const PaymentTab = styled.div<{ active: boolean }>`
   padding: 10px 16px;
   border-radius: 8px;
   border: 2px solid ${({ active }) => active ? '#ff6600' : 'var(--border)'};
@@ -99,7 +99,7 @@ export const CardBrands = styled.div`
   align-items: center;
 `;
 
-export const CardBrand = styled.div`
+export const CardBrand = styled.div<{ selected: boolean }>`
   border: 2px solid ${({ selected }) => selected ? '#ff6600' : 'var(--border)'};
   border-radius: 8px;
   padding: 6px 12px;
@@ -143,42 +143,120 @@ export const BoletoBox = styled.div`
 `;
 
 export const ResumeContainer = styled.div`
-
+ position: sticky;
+ top: 90px;
 `;
 
 export const Card = styled.div`
-
+ background: var(--bg-card);
+ border-radius: 12px;
+ padding: 24px;
+ box-shadow: 0 2px 8px var(--shadow);
 `;
 
 
 export const ResumeItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
 
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f3f3f3;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `;
 
 export const ResumeItemInfo = styled.div`
+ flex: 1;
 
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
 `;
 
 export const ResumeItemPrice = styled.div`
-
+  font-weight: 700;
+  color: #ff6600;
+  margin: 0;
+  font-size: 0.95rem;
 `;
 
 export const ResumeTotal = styled.div`
-
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--border);
 `;
 
 export const ResumeTotalRow = styled.div`
-
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
 `;
 
 export const ResumeTotalFinal = styled.div`
-
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 12px;
 `;
 
 export const FinalizarButton = styled.button`
+  width: 100%;
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.2s;
 
+  &:hover {
+    background: #e05500;
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
 `;
 
 export const SelectInput = styled.select`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text);
+  box-sizing: border-box;
+  cursor: pointer;
 
+  &:focus {
+    outline: none;
+    border-color: #ff6600;
+  }
 `;

@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {useCart} from '../../context/CartContext';
 import {useAuth} from '../../context/AuthContext';
 import {Container, Title, Section,SectionTitle,Label,
-    Input,Grid2,PaymentsTabs,PaymentTab,CardBrands,CardBrand,PixBox,BoletoBox,ResumeContainer,
+    Input,Grid2,PaymentsTabs,PaymentTab,CardBrands , CardBrand,PixBox,BoletoBox,ResumeContainer,
     Card,ResumeItem,ResumeItemInfo,ResumeItemPrice,ResumeTotal,ResumeTotalRow,
     ResumeTotalFinal,FinalizarButton,SelectInput
 } from './styles';

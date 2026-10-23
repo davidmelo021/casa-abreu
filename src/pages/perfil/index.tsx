@@ -168,21 +168,7 @@ export default function Perfil() {
         </Grid>
       </Section>
 
-      <Section>
-        <SectionTitle>Método de pagamento</SectionTitle>
-        <Label>Preferência</Label>
-        <select
-          value={perfil.metodo_pagamento || ''}
-          onChange={e => setPerfil({ ...perfil, metodo_pagamento: e.target.value })}
-          style={{ padding: '10px', borderRadius: '6px', border: '1px solid #ddd', width: '100%' }}
-        >
-          <option value="">Selecione...</option>
-          <option value="cartao_credito">Cartão de Crédito</option>
-          <option value="cartao_debito">Cartão de Débito</option>
-          <option value="pix">PIX</option>
-          <option value="boleto">Boleto</option>
-        </select>
-      </Section>
+      
 
       <Section>
         <SectionTitle>Preferências</SectionTitle>
